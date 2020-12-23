@@ -15,11 +15,11 @@ import {
 } from "react-admin";
 
 const PostTitle = ({ record }) => {
-        return <span>Post {record ? `"${record.title}"` : ''}</span>;
-    };
+  return <span>Post {record ? `"${record.title}"` : ""}</span>;
+};
 
 export const PostList = (props) => (
-    <List filters={<PostFilter />} {...props}>
+  <List filters={<PostFilter />} {...props}>
     <Datagrid>
       <TextField source="id" />
       <ReferenceField source="userId" reference="users">
@@ -32,7 +32,7 @@ export const PostList = (props) => (
 );
 
 export const PostEdit = (props) => (
-    <Edit title={<PostTitle />} {...props}>
+  <Edit title={<PostTitle />} {...props}>
     <SimpleForm>
       <TextInput disabled source="id" />
       <ReferenceInput source="userId" reference="users">
@@ -57,10 +57,10 @@ export const PostCreate = (props) => (
 );
 
 const PostFilter = (props) => (
-    <Filter {...props}>
-        <TextInput label="Search" source="q" alwaysOn />
-        <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
-            <SelectInput optionText="name" />
-        </ReferenceInput>
-    </Filter>
+  <Filter {...props}>
+    <TextInput label="Search" source="q" alwaysOn />
+    <ReferenceInput label="User" source="userId" reference="users" allowEmpty>
+      <SelectInput optionText="name" />
+    </ReferenceInput>
+  </Filter>
 );
