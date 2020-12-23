@@ -1,4 +1,5 @@
-import * as React from "react";
+/* eslint-disable react/jsx-props-no-spreading */
+import * as React from 'react';
 import {
   List,
   Datagrid,
@@ -12,10 +13,10 @@ import {
   TextInput,
   Create,
   Filter,
-} from "react-admin";
+} from 'react-admin';
 
 const PostTitle = ({ record }) => {
-  return <span>Post {record ? `"${record.title}"` : ""}</span>;
+  return <span>Post {record ? `"${record.title}"` : ''}</span>;
 };
 
 export const PostList = (props) => (

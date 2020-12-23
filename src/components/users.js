@@ -1,6 +1,8 @@
-import * as React from "react";
-import { List, Datagrid, TextField, EmailField } from "react-admin";
-import MyUrlField from "./MyUrlField";
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable react/jsx-props-no-spreading */
+import * as React from 'react';
+import { List, Datagrid, TextField, EmailField } from 'react-admin';
+import MyUrlField from './MyUrlField';
 
 export const UserList = (props) => (
   <List {...props}>

@@ -1,13 +1,13 @@
-import * as React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import LaunchIcon from "@material-ui/icons/Launch";
+import * as React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import LaunchIcon from '@material-ui/icons/Launch';
 
 const useStyles = makeStyles({
   link: {
-    textDecoration: "none",
+    textDecoration: 'none',
   },
   icon: {
-    width: "0.5em",
+    width: '0.5em',
     paddingLeft: 2,
   },
 });

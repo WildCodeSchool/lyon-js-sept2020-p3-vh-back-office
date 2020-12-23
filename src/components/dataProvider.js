@@ -1,7 +1,7 @@
-import { fetchUtils } from "react-admin";
-import { stringify } from "query-string";
+import { fetchUtils } from 'react-admin';
+import { stringify } from 'query-string';
 
-const apiUrl = "http://localhost:5000";
+const apiUrl = 'http://localhost:5000';
 const httpClient = fetchUtils.fetchJson;
 
 export default {
@@ -15,7 +15,7 @@ export default {
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-    return httpClient(url).then(({ headers, json }) => ({
+    return httpClient(url).then(({ /* headers, */ json }) => ({
       data: json,
       /* total: parseInt(headers.get('content-range').split('/').pop(), 10), */
       total: 123,
@@ -50,13 +50,13 @@ export default {
 
     return httpClient(url).then(({ headers, json }) => ({
       data: json,
-      total: parseInt(headers.get("content-range").split("/").pop(), 10),
+      total: parseInt(headers.get('content-range').split('/').pop(), 10),
     }));
   },
 
   update: (resource, params) =>
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
-      method: "PUT",
+      method: 'PUT',
       body: JSON.stringify(params.data),
     }).then(({ json }) => ({ data: json })),
 
@@ -65,14 +65,14 @@ export default {
       filter: JSON.stringify({ id: params.ids }),
     };
     return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
-      method: "PUT",
+      method: 'PUT',
       body: JSON.stringify(params.data),
     }).then(({ json }) => ({ data: json }));
   },
 
   create: (resource, params) =>
     httpClient(`${apiUrl}/${resource}`, {
-      method: "POST",
+      method: 'POST',
       body: JSON.stringify(params.data),
     }).then(({ json }) => ({
       data: { ...params.data, id: json.id },
@@ -80,7 +80,7 @@ export default {
 
   delete: (resource, params) =>
     httpClient(`${apiUrl}/${resource}/${params.id}`, {
-      method: "DELETE",
+      method: 'DELETE',
     }).then(({ json }) => ({ data: json })),
 
   deleteMany: (resource, params) => {
@@ -88,7 +88,7 @@ export default {
       filter: JSON.stringify({ id: params.ids }),
     };
     return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
-      method: "DELETE",
+      method: 'DELETE',
       body: JSON.stringify(params.data),
     }).then(({ json }) => ({ data: json }));
   },
