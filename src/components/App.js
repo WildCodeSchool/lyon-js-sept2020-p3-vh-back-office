@@ -1,7 +1,8 @@
-import './App.css';
+import * as React from "react";
+import { Admin } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
 
-function App() {
-  return <div className='App'>Back-office</div>;
-}
+const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+const App = () => <Admin dataProvider={dataProvider} />;
 
 export default App;
