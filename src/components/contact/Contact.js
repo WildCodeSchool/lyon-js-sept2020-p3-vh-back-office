@@ -4,11 +4,12 @@ import { List, Datagrid, TextField } from 'react-admin';
 import API from '../../services/API';
 
 const ContactList = (props) => {
+  // eslint-disable-next-line no-unused-vars
   const [contact, setContact] = useState();
 
   useEffect(() => {
     API.get('/contact').then((res) => setContact(res.data));
-  }, [contact]);
+  }, []);
 
   return (
     <div>
