@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { Admin, Resource } from 'react-admin';
-/* import { PostList, PostEdit, PostCreate } from "./posts";
-import { UserList } from "./users";
-import jsonServerProvider from "ra-data-json-server";
-import PostIcon from "@material-ui/icons/Book";
-import UserIcon from "@material-ui/icons/Group"; */
+import EmailIcon from '@material-ui/icons/Email';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
-import ContactList from './contact/Contact';
+import { messageList, createMessage, showMessage } from './contact/Contact';
 
 const App = () => (
   <Admin
@@ -16,7 +12,14 @@ const App = () => (
     dashboard={Dashboard}
     authProvider={authProvider}
   >
-    <Resource name="contact" list={ContactList} />
+    <Resource
+      options={{ label: 'Messages' }}
+      name="contact"
+      list={messageList}
+      create={createMessage}
+      show={showMessage}
+      icon={EmailIcon}
+    />
   </Admin>
 );
 

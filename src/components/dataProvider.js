@@ -1,24 +1,25 @@
+/* eslint-disable no-param-reassign */
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
 const apiUrl = 'http://localhost:5000';
-const httpClient = fetchUtils.fetchJson;
+const httpClient = (url, options = {}) => {
+  if (!options.headers) {
+    options.headers = new Headers({
+      Accept: 'application/json',
+    });
+  }
+  options.credentials = 'include';
+  return fetchUtils.fetchJson(url, options);
+};
 
 export default {
-  getList: (resource, params) => {
-    const { page, perPage } = params.pagination;
-    const { field, order } = params.sort;
-    const query = {
-      sort: JSON.stringify([field, order]),
-      range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-      filter: JSON.stringify(params.filter),
-    };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+  getList: (resource) => {
+    const url = `${apiUrl}/${resource}`;
 
     return httpClient(url).then(({ /* headers, */ json }) => ({
       data: json,
-      /* total: parseInt(headers.get('content-range').split('/').pop(), 10), */
-      total: 123,
+      total: json.length,
     }));
   },
 
@@ -78,18 +79,18 @@ export default {
       data: { ...params.data, id: json.id },
     })),
 
-  delete: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+  delete: (resource, params) => {
+    return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'DELETE',
-    }).then(({ json }) => ({ data: json })),
+    }).then((res) => ({ data: res.status }));
+  },
 
-  deleteMany: (resource, params) => {
-    const query = {
-      filter: JSON.stringify({ id: params.ids }),
-    };
-    return httpClient(`${apiUrl}/${resource}?${stringify(query)}`, {
-      method: 'DELETE',
-      body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json }));
+  deleteMany: async (resource, params) => {
+    await params.ids.map((id) => {
+      return httpClient(`${apiUrl}/${resource}/${id}`, {
+        method: 'DELETE',
+      });
+    });
+    return { data: ['datas deleted'] };
   },
 };
