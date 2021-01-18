@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
@@ -26,6 +27,7 @@ const App = () => (
       list={sponsorsList}
       create={createSponsor}
       show={showSponsors}
+      icon={BusinessCenterIcon}
     />
   </Admin>
 );

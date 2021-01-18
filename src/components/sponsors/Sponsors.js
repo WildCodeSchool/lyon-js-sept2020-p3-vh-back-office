@@ -23,11 +23,7 @@ const PostShowActions = ({ basePath, data, resource }) => (
 );
 
 const PostTitle = ({ record }) => {
-  return (
-    <span>
-      {record ? `Message de ${record.firstname} ${record.lastname}` : ''}
-    </span>
-  );
+  return <span>{record ? `Sponsors ${record.name} ` : ''}</span>;
 };
 
 export const sponsorsList = (props) => {
