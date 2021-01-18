@@ -5,7 +5,7 @@ import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
 import { messageList, createMessage, showMessage } from './contact/Contact';
-import { sponsorsList, createSponsor } from './sponsors/Sponsors';
+import { sponsorsList, createSponsor, showSponsors } from './sponsors/Sponsors';
 
 const App = () => (
   <Admin
@@ -21,7 +21,12 @@ const App = () => (
       show={showMessage}
       icon={EmailIcon}
     />
-    <Resource name="sponsors" list={sponsorsList} create={createSponsor} />
+    <Resource
+      name="sponsors"
+      list={sponsorsList}
+      create={createSponsor}
+      show={showSponsors}
+    />
   </Admin>
 );
 

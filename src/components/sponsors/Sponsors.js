@@ -56,15 +56,12 @@ export const createSponsor = (props) => {
   );
 };
 
-export const showMessage = (props) => {
+export const showSponsors = (props) => {
   return (
     <Show title={<PostTitle />} {...props} actions={<PostShowActions />}>
       <SimpleShowLayout>
-        <TextField source="firstname" />
-        <TextField source="lastname" />
-        <TextField source="email" />
-        <TextField source="purpose" />
-        <TextField source="message" />
+        <TextField source="name" />
+        <TextField source="image" />
       </SimpleShowLayout>
     </Show>
   );
