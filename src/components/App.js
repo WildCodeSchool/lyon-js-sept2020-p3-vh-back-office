@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { Helmet } from 'react-helmet';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
 import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
+import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
@@ -17,55 +19,70 @@ import {
   createCarousel,
   showCarousel,
 } from './Carousel/Carousel';
+import { faqList, createFaq, showFaq, faqEdit } from './faq/Faq';
 
 const App = () => (
-  <Admin
-    dataProvider={dataProvider}
-    dashboard={Dashboard}
-    authProvider={authProvider}
-  >
-    <Resource
-      options={{ label: 'Messages' }}
-      name="contact"
-      list={messageList}
-      create={createMessage}
-      show={showMessage}
-      icon={EmailIcon}
-    />
-    <Resource
-      options={{ label: 'Users' }}
-      name="users"
-      list={userList}
-      create={createUser}
-      show={showUser}
-      edit={userEdit}
-      icon={PersonIcon}
-    />
-    <Resource
-      name="sponsors"
-      list={sponsorsList}
-      create={createSponsor}
-      show={showSponsors}
-      icon={BusinessCenterIcon}
-    />
-    <Resource
-      options={{ label: 'Wines' }}
-      name="products"
-      list={wineList}
-      create={createWine}
-      show={showWine}
-      edit={wineEdit}
-      icon={LocalBarIcon}
-    />
-    <Resource
-      options={{ label: 'Carousel' }}
-      name="carrousel"
-      list={carouselList}
-      create={createCarousel}
-      show={showCarousel}
-      icon={PhotoLibraryIcon}
-    />
-  </Admin>
+  <>
+    <Helmet>
+      <title>Hypnose & Vins</title>
+    </Helmet>
+    <Admin
+      dataProvider={dataProvider}
+      dashboard={Dashboard}
+      authProvider={authProvider}
+    >
+      <Resource
+        options={{ label: 'Messages' }}
+        name="contact"
+        list={messageList}
+        create={createMessage}
+        show={showMessage}
+        icon={EmailIcon}
+      />
+      <Resource
+        options={{ label: 'Users' }}
+        name="users"
+        list={userList}
+        create={createUser}
+        show={showUser}
+        edit={userEdit}
+        icon={PersonIcon}
+      />
+      <Resource
+        name="sponsors"
+        list={sponsorsList}
+        create={createSponsor}
+        show={showSponsors}
+        icon={BusinessCenterIcon}
+      />
+      <Resource
+        options={{ label: 'Wines' }}
+        name="products"
+        list={wineList}
+        create={createWine}
+        show={showWine}
+        edit={wineEdit}
+        icon={LocalBarIcon}
+      />
+      <Resource
+        options={{ label: 'Faq' }}
+        name="faq"
+        list={faqList}
+        create={createFaq}
+        show={showFaq}
+        edit={faqEdit}
+        icon={LiveHelpIcon}
+      />
+      <Resource
+        options={{ label: 'Carousel' }}
+        name="carrousel"
+        list={carouselList}
+        create={createCarousel}
+        show={showCarousel}
+        icon={PhotoLibraryIcon}
+      />
+    </Admin>
+  </>
 );
 
 export default App;
