@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
+// import LocalBarIcon from '@material-ui/icons/LocalBar';
+
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
@@ -20,6 +22,15 @@ const App = () => (
       show={showMessage}
       icon={EmailIcon}
     />
+
+    {/* <Resource
+      options={{ label: 'Reviews' }}
+      name="contact"
+      list={messageList}
+      create={createMessage}
+      show={showMessage}
+      icon={LocalBarIcon}
+    /> */}
   </Admin>
 );
 
