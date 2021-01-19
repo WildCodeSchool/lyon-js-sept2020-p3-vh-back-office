@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
-// import LocalBarIcon from '@material-ui/icons/LocalBar';
 
 import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
+import StarIcon from '@material-ui/icons/Star';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
@@ -13,6 +13,7 @@ import { messageList, createMessage, showMessage } from './contact/Contact';
 import { userList, showUser, createUser, userEdit } from './user/user';
 import { sponsorsList, createSponsor, showSponsors } from './sponsors/Sponsors';
 import { wineList, createWine, showWine, wineEdit } from './Wine/Wine';
+import { reviewsList, showReview } from './Reviews/Reviews';
 
 const App = () => (
   <Admin
@@ -29,14 +30,6 @@ const App = () => (
       icon={EmailIcon}
     />
 
-    {/* <Resource
-      options={{ label: 'Reviews' }}
-      name="contact"
-      list={messageList}
-      create={createMessage}
-      show={showMessage}
-      icon={LocalBarIcon}
-    /> */}
     <Resource
       options={{ label: 'Users' }}
       name="users"
@@ -61,6 +54,14 @@ const App = () => (
       show={showWine}
       edit={wineEdit}
       icon={LocalBarIcon}
+    />
+
+    <Resource
+      options={{ label: 'Reviews' }}
+      name="reviews"
+      list={reviewsList}
+      show={showReview}
+      icon={StarIcon}
     />
   </Admin>
 );

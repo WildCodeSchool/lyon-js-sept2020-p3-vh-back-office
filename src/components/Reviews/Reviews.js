@@ -5,10 +5,7 @@ import {
   List,
   Datagrid,
   TextField,
-  Create,
   SimpleShowLayout,
-  TextInput,
-  SimpleForm,
   TopToolbar,
   ListButton,
   DeleteButton,
@@ -25,52 +22,34 @@ const PostShowActions = ({ basePath, data, resource }) => (
 const PostTitle = ({ record }) => {
   return (
     <span>
-      {record ? `Message de ${record.firstname} ${record.lastname}` : ''}
+      {record ? `Ratings: ${record.firstname} ${record.lastname}` : ''}
     </span>
   );
 };
 
-export const messageList = (props) => {
+export const reviewsList = (props) => {
   return (
     <div>
       <List {...props} title="Reviews">
         <Datagrid rowClick="show">
           <TextField source="firstname" />
           <TextField source="lastname" />
-          <TextField source="email" />
-          <TextField source="purpose" />
-          <TextField source="message" />
+          <TextField source="rating" />
+          <TextField source="comment" />
         </Datagrid>
       </List>
     </div>
   );
 };
 
-export const createMessage = (props) => {
-  return (
-    <div>
-      <Create {...props} title="Créer un message">
-        <SimpleForm>
-          <TextInput source="firstname" />
-          <TextInput source="lastname" />
-          <TextInput source="email" />
-          <TextInput source="purpose" />
-          <TextInput source="message" />
-        </SimpleForm>
-      </Create>
-    </div>
-  );
-};
-
-export const showMessage = (props) => {
+export const showReview = (props) => {
   return (
     <Show title={<PostTitle />} {...props} actions={<PostShowActions />}>
       <SimpleShowLayout>
         <TextField source="firstname" />
         <TextField source="lastname" />
-        <TextField source="email" />
-        <TextField source="purpose" />
-        <TextField source="message" />
+        <TextField source="rating" />
+        <TextField source="comment" />
       </SimpleShowLayout>
     </Show>
   );
