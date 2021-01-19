@@ -21,9 +21,7 @@ const PostShowActions = ({ basePath, data, resource }) => (
 
 const PostTitle = ({ record }) => {
   return (
-    <span>
-      {record ? `Ratings: ${record.firstname} ${record.lastname}` : ''}
-    </span>
+    <span>{record ? `Ratings: ${record.firstname} ${record.rating}` : ''}</span>
   );
 };
 
@@ -36,6 +34,7 @@ export const reviewsList = (props) => {
           <TextField source="lastname" />
           <TextField source="rating" />
           <TextField source="comment" />
+          <TextField source="title" />
         </Datagrid>
       </List>
     </div>
@@ -50,6 +49,7 @@ export const showReview = (props) => {
         <TextField source="lastname" />
         <TextField source="rating" />
         <TextField source="comment" />
+        <TextField source="title" />
       </SimpleShowLayout>
     </Show>
   );
