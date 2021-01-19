@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Helmet } from 'react-helmet';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
 import PersonIcon from '@material-ui/icons/Person';
@@ -15,54 +16,59 @@ import { wineList, createWine, showWine, wineEdit } from './Wine/Wine';
 import { faqList, createFaq, showFaq, faqEdit } from './faq/Faq';
 
 const App = () => (
-  <Admin
-    dataProvider={dataProvider}
-    dashboard={Dashboard}
-    authProvider={authProvider}
-  >
-    <Resource
-      options={{ label: 'Messages' }}
-      name="contact"
-      list={messageList}
-      create={createMessage}
-      show={showMessage}
-      icon={EmailIcon}
-    />
-    <Resource
-      options={{ label: 'Users' }}
-      name="users"
-      list={userList}
-      create={createUser}
-      show={showUser}
-      edit={userEdit}
-      icon={PersonIcon}
-    />
-    <Resource
-      name="sponsors"
-      list={sponsorsList}
-      create={createSponsor}
-      show={showSponsors}
-      icon={BusinessCenterIcon}
-    />
-    <Resource
-      options={{ label: 'Wines' }}
-      name="products"
-      list={wineList}
-      create={createWine}
-      show={showWine}
-      edit={wineEdit}
-      icon={LocalBarIcon}
-    />
-    <Resource
-      options={{ label: 'Faq' }}
-      name="faq"
-      list={faqList}
-      create={createFaq}
-      show={showFaq}
-      edit={faqEdit}
-      icon={LiveHelpIcon}
-    />
-  </Admin>
+  <>
+    <Helmet>
+      <title>Hypnose & Vins</title>
+    </Helmet>
+    <Admin
+      dataProvider={dataProvider}
+      dashboard={Dashboard}
+      authProvider={authProvider}
+    >
+      <Resource
+        options={{ label: 'Messages' }}
+        name="contact"
+        list={messageList}
+        create={createMessage}
+        show={showMessage}
+        icon={EmailIcon}
+      />
+      <Resource
+        options={{ label: 'Users' }}
+        name="users"
+        list={userList}
+        create={createUser}
+        show={showUser}
+        edit={userEdit}
+        icon={PersonIcon}
+      />
+      <Resource
+        name="sponsors"
+        list={sponsorsList}
+        create={createSponsor}
+        show={showSponsors}
+        icon={BusinessCenterIcon}
+      />
+      <Resource
+        options={{ label: 'Wines' }}
+        name="products"
+        list={wineList}
+        create={createWine}
+        show={showWine}
+        edit={wineEdit}
+        icon={LocalBarIcon}
+      />
+      <Resource
+        options={{ label: 'Faq' }}
+        name="faq"
+        list={faqList}
+        create={createFaq}
+        show={showFaq}
+        edit={faqEdit}
+        icon={LiveHelpIcon}
+      />
+    </Admin>
+  </>
 );
 
 export default App;
