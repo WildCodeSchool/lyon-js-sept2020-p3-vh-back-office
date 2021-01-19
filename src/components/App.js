@@ -2,9 +2,11 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
+
 import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
+import StarIcon from '@material-ui/icons/Star';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import Dashboard from './Dashboard';
@@ -20,6 +22,7 @@ import {
   showCarousel,
 } from './Carousel/Carousel';
 import { faqList, createFaq, showFaq, faqEdit } from './faq/Faq';
+import { reviewsList, showReview } from './Reviews/Reviews';
 
 const App = () => (
   <>
@@ -72,6 +75,13 @@ const App = () => (
         show={showFaq}
         edit={faqEdit}
         icon={LiveHelpIcon}
+      />
+      <Resource
+        options={{ label: 'Reviews' }}
+        name="reviews"
+        list={reviewsList}
+        show={showReview}
+        icon={StarIcon}
       />
       <Resource
         options={{ label: 'Carousel' }}
