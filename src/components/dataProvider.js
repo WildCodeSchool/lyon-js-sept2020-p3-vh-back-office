@@ -2,7 +2,7 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-const apiUrl = 'http://localhost:5000';
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -72,13 +72,36 @@ export default {
     }).then(({ json }) => ({ data: json }));
   },
 
-  create: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}`, {
+  // create: (resource, params) =>
+  //   httpClient(`${apiUrl}/${resource}`, {
+  //     method: 'POST',
+  //     body: JSON.stringify(params.data),
+  //   }).then(({ json }) => ({
+  //     data: { ...params.data, id: json.id },
+  //   })),
+
+  create: (resource, params) => {
+    if (resource !== 'sponsors') {
+      return httpClient(`${apiUrl}/${resource}`, {
+        method: 'POST',
+        body: JSON.stringify(params.data),
+      }).then(({ json }) => ({
+        data: { ...params.data, id: json.id },
+      }));
+    }
+
+    const formData = new FormData();
+
+    formData.append('name', params.data.name);
+    formData.append('image', params.data.image.rawFile);
+
+    return httpClient(`${apiUrl}/${resource}`, {
       method: 'POST',
-      body: JSON.stringify(params.data),
+      body: formData,
     }).then(({ json }) => ({
       data: { ...params.data, id: json.id },
-    })),
+    }));
+  },
 
   delete: (resource, params) => {
     return httpClient(`${apiUrl}/${resource}/${params.id}`, {
