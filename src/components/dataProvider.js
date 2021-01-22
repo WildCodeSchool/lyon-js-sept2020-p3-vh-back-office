@@ -2,7 +2,7 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-const apiUrl = process.env.REACT_APP_API_BASE_URL;
+const apiUrl = 'http://localhost:5000';
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -29,13 +29,12 @@ export default {
       data: json,
     })),
 
-  getMany: async (resource, params) => {
-    await params.ids.map((id) => {
-      return httpClient(`${apiUrl}/${resource}/${id}`);
-    });
-    return ({ json }) => ({
-      data: json,
-    });
+  getMany: (resource, params) => {
+    const query = {
+      filter: JSON.stringify({ id: params.ids }),
+    };
+    const url = `${apiUrl}/${resource}?${stringify(query)}`;
+    return httpClient(url).then(({ json }) => ({ data: json }));
   },
 
   getManyReference: (resource, params) => {
@@ -73,36 +72,13 @@ export default {
     }).then(({ json }) => ({ data: json }));
   },
 
-  // create: (resource, params) =>
-  //   httpClient(`${apiUrl}/${resource}`, {
-  //     method: 'POST',
-  //     body: JSON.stringify(params.data),
-  //   }).then(({ json }) => ({
-  //     data: { ...params.data, id: json.id },
-  //   })),
-
-  create: (resource, params) => {
-    if (resource !== 'sponsors') {
-      return httpClient(`${apiUrl}/${resource}`, {
-        method: 'POST',
-        body: JSON.stringify(params.data),
-      }).then(({ json }) => ({
-        data: { ...params.data, id: json.id },
-      }));
-    }
-
-    const formData = new FormData();
-
-    formData.append('name', params.data.name);
-    formData.append('image', params.data.image.rawFile);
-
-    return httpClient(`${apiUrl}/${resource}`, {
+  create: (resource, params) =>
+    httpClient(`${apiUrl}/${resource}`, {
       method: 'POST',
-      body: formData,
+      body: JSON.stringify(params.data),
     }).then(({ json }) => ({
       data: { ...params.data, id: json.id },
-    }));
-  },
+    })),
 
   delete: (resource, params) => {
     return httpClient(`${apiUrl}/${resource}/${params.id}`, {

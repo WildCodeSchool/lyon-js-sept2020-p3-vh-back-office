@@ -11,6 +11,8 @@ import {
   SimpleShowLayout,
   SelectInput,
   DateField,
+  ImageInput,
+  ImageField,
   TextField,
   UrlField,
   SimpleForm,
@@ -87,7 +89,20 @@ export const CreateEvent = (props) => {
             optionText="role"
           />
           <TextInput source="duration_seconds" />
-          <TextInput source="main_picture_url" />
+          <ImageInput
+            source="main_picture_url"
+            label="Aperçu de l'image"
+            accept="image/*"
+            placeholder={
+              // eslint-disable-next-line react/jsx-wrap-multilines
+              <p>
+                Vous pouvez glisser/déposer un fichier ici ou cliquer pour
+                parcourir
+              </p>
+            }
+          >
+            <ImageField source="src" title="title" />
+          </ImageInput>
           <SelectInput source="address_id" choices={adress} optionText="city" />
           <TextInput source="availabilities" />
           <SelectInput source="wine_id" choices={wine} optionText="name" />
