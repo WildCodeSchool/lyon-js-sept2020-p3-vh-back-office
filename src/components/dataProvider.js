@@ -29,12 +29,13 @@ export default {
       data: json,
     })),
 
-  getMany: (resource, params) => {
-    const query = {
-      filter: JSON.stringify({ id: params.ids }),
-    };
-    const url = `${apiUrl}/${resource}?${stringify(query)}`;
-    return httpClient(url).then(({ json }) => ({ data: json }));
+  getMany: async (resource, params) => {
+    await params.ids.map((id) => {
+      return httpClient(`${apiUrl}/${resource}/${id}`);
+    });
+    return ({ json }) => ({
+      data: json,
+    });
   },
 
   getManyReference: (resource, params) => {
