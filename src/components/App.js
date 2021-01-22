@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
-
 import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
