@@ -56,11 +56,12 @@ export default {
     }));
   },
 
-  update: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+  update: (resource, params) => {
+    return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'PUT',
       body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json })),
+    }).then(({ json }) => ({ data: json }));
+  },
 
   updateMany: (resource, params) => {
     const query = {
@@ -89,7 +90,6 @@ export default {
         data: { ...params.data, id: json.id },
       }));
     }
-
     const formData = new FormData();
 
     formData.append('name', params.data.name);

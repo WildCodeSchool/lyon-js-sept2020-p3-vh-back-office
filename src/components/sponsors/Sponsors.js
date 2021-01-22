@@ -84,7 +84,7 @@ export const createSponsor = (props) => {
               </p>
             }
           >
-            <ImageField source="src" title="title" />
+            <ImageField source="image" title="title" />
           </ImageInput>
         </SimpleForm>
       </Create>
@@ -98,13 +98,16 @@ export const showSponsors = (props) => {
       <SimpleShowLayout>
         <TextField source="name" label="Nom du partenaire" />
         <FunctionField
+          source="blal"
           label="Aperçu de l'image"
           render={(record) => {
             return (
-              <img
-                alt={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
-                src={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
-              />
+              typeof record.image === 'string' && (
+                <img
+                  alt={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
+                  src={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
+                />
+              )
             );
           }}
         />
