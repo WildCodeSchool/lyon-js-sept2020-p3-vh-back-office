@@ -6,6 +6,7 @@ import EmailIcon from '@material-ui/icons/Email';
 import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
+import EventIcon from '@material-ui/icons/Event';
 import StarIcon from '@material-ui/icons/Star';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
@@ -16,6 +17,7 @@ import { messageList, createMessage, showMessage } from './contact/Contact';
 import { userList, showUser, createUser, userEdit } from './user/user';
 import { sponsorsList, createSponsor, showSponsors } from './sponsors/Sponsors';
 import { wineList, createWine, showWine, wineEdit } from './Wine/Wine';
+import { EventList, CreateEvent, ShowEvent, EventEdit } from './event/event';
 import {
   carouselList,
   createCarousel,
@@ -50,6 +52,15 @@ const App = () => (
         show={showUser}
         edit={userEdit}
         icon={PersonIcon}
+      />
+      <Resource
+        options={{ label: 'Events' }}
+        name="events"
+        list={EventList}
+        create={CreateEvent}
+        show={ShowEvent}
+        edit={EventEdit}
+        icon={EventIcon}
       />
       <Resource
         name="sponsors"
