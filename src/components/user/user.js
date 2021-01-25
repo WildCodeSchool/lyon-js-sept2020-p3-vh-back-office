@@ -4,33 +4,26 @@ import {
   Show,
   List,
   Edit,
-  EditButton,
   Datagrid,
   TextInput,
   Create,
   SimpleShowLayout,
   TextField,
   SimpleForm,
-  TopToolbar,
-  ListButton,
-  DeleteButton,
   FunctionField,
+  // UrlField,
+  EmailField,
+  PasswordInput,
+  ImageInput,
+  ImageField,
+  AutocompleteInput,
 } from 'react-admin';
-import { CustomSlicedField } from '../Toolbars';
+import { CustomSlicedField, OnShowToolbar, CustomPagination } from '../Helpers';
 
-// eslint-disable-next-line no-unused-vars
-const PostShowActions = ({ basePath, data, resource }) => (
-  <TopToolbar>
-    <ListButton basePath={basePath} />
-    <EditButton basePath={basePath} record={data} />
-    <DeleteButton basePath={basePath} record={data} />
-  </TopToolbar>
-);
-
-const PostTitle = ({ record }) => {
+const Title = ({ record }) => {
   return (
     <span>
-      {record ? `Message de ${record.firstname} ${record.lastname}` : ''}
+      {record ? `Utilisateur ${record.firstname} ${record.lastname}` : ''}
     </span>
   );
 };
@@ -38,11 +31,11 @@ const PostTitle = ({ record }) => {
 export const userList = (props) => {
   return (
     <div>
-      <List {...props} title="Utilisateurs">
+      <List {...props} title="Utilisateurs" pagination={<CustomPagination />}>
         <Datagrid rowClick="show">
           <TextField source="firstname" label="Prenom" />
           <TextField source="lastname" label="Nom" />
-          <TextField source="email" />
+          <EmailField source="email" />
           <TextField source="phone_number" label="Téléphone" />
           <CustomSlicedField label="Bio" />
           <TextField source="role" label="Type utilisateur" />
@@ -58,10 +51,10 @@ export const userList = (props) => {
               );
             }}
           />
-          <TextField source="website_url" label="Site web" />
-          <TextField source="facebook_url" label="Facebook" />
-          <TextField source="twitter_url" label="Twitter" />
-          <TextField source="instagram_url" label="Instagram" />
+          {/* <UrlField source="website_url" label="Site web" />
+          <UrlField source="facebook_url" label="Facebook" />
+          <UrlField source="twitter_url" label="Twitter" />
+          <UrlField source="instagram_url" label="Instagram" /> */}
         </Datagrid>
       </List>
     </div>
@@ -73,19 +66,41 @@ export const createUser = (props) => {
     <div>
       <Create {...props} title="Créer un user">
         <SimpleForm>
-          <TextInput source="firstname" />
-          <TextInput source="lastname" />
+          <TextInput source="firstname" label="Prenom" />
+          <TextInput source="lastname" label="Nom" />
           <TextInput source="email" />
-          <TextInput source="password" />
-          <TextInput source="password_confirmation" />
-          <TextInput source="phone_number" />
+          <PasswordInput source="password" label="Mot de passe" />
+          <PasswordInput
+            source="password_confirmation"
+            label="Confirmer le mot de passe"
+          />
+          <TextInput source="phone_number" label="Téléphone" />
           <TextInput source="bio" />
-          <TextInput source="role" />
-          <TextInput source="photo_url" />
-          <TextInput source="website_url" />
-          <TextInput source="facebook_url" />
-          <TextInput source="twitter_url" />
-          <TextInput source="instagram_url" />
+          <AutocompleteInput
+            source="role"
+            choices={[
+              { id: 'animator', name: 'Animateur' },
+              { id: 'customer', name: 'Client' },
+            ]}
+          />
+          <ImageInput
+            source="image"
+            label="Aperçu de l'image"
+            accept="image/*"
+            placeholder={
+              // eslint-disable-next-line react/jsx-wrap-multilines
+              <p>
+                Vous pouvez glisser/déposer un fichier ici ou cliquer pour
+                parcourir
+              </p>
+            }
+          >
+            <ImageField source="src" title="title" />
+          </ImageInput>
+          <TextInput source="website_url" label="Site web" />
+          <TextInput source="facebook_url" label="Facebook" />
+          <TextInput source="twitter_url" label="Twitter" />
+          <TextInput source="instagram_url" label="Instagram" />
         </SimpleForm>
       </Create>
     </div>
@@ -94,7 +109,7 @@ export const createUser = (props) => {
 
 export const showUser = (props) => {
   return (
-    <Show title={<PostTitle />} {...props} actions={<PostShowActions />}>
+    <Show title={<Title />} {...props} actions={<OnShowToolbar edit />}>
       <SimpleShowLayout>
         <TextField source="firstname" label="Prenom" />
         <TextField source="lastname" label="Nom" />
@@ -123,21 +138,31 @@ export const showUser = (props) => {
 };
 
 export const userEdit = (props) => (
-  <Edit title={<PostTitle />} {...props}>
+  <Edit title={<Title />} {...props}>
     <SimpleForm>
-      <TextInput source="firstname" />
-      <TextInput source="lastname" />
+      <TextInput source="firstname" label="Prenom" />
+      <TextInput source="lastname" label="Nom" />
       <TextInput source="email" />
-      <TextInput source="password" />
-      <TextInput source="password_confirmation" />
       <TextInput source="phone_number" />
       <TextInput source="bio" />
-      <TextInput source="role" />
-      <TextInput source="photo_url" />
-      <TextInput source="website_url" />
-      <TextInput source="facebook_url" />
-      <TextInput source="twitter_url" />
-      <TextInput source="instagram_url" />
+      <TextInput source="role" label="Type utilisateur" />
+      <ImageInput
+        source="image"
+        label="Aperçu de l'image"
+        accept="image/*"
+        placeholder={
+          // eslint-disable-next-line react/jsx-wrap-multilines
+          <p>
+            Vous pouvez glisser/déposer un fichier ici ou cliquer pour parcourir
+          </p>
+        }
+      >
+        <ImageField source="src" title="title" />
+      </ImageInput>
+      <TextInput source="website_url" label="Site web" />
+      <TextInput source="facebook_url" label="Facebook" />
+      <TextInput source="twitter_url" label="Twitter" />
+      <TextInput source="instagram_url" label="Instagram" />
     </SimpleForm>
   </Edit>
 );

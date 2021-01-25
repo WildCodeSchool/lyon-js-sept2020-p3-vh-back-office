@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import {
+  Pagination,
   TopToolbar,
   ListButton,
   DeleteButton,
@@ -7,6 +8,7 @@ import {
   ExportButton,
   useListContext,
   BulkDeleteButton,
+  EditButton,
 } from 'react-admin';
 
 export const OnListToolbar = (props) => {
@@ -20,12 +22,15 @@ export const OnListToolbar = (props) => {
   );
 };
 
-export const OnShowToolbar = ({ basePath, data }) => (
-  <TopToolbar>
-    <ListButton basePath={basePath} />
-    <DeleteButton basePath={basePath} record={data} />
-  </TopToolbar>
-);
+export const OnShowToolbar = ({ basePath, data, edit }) => {
+  return (
+    <TopToolbar>
+      {edit && <EditButton basePath={basePath} record={data} />}
+      <ListButton basePath={basePath} />
+      <DeleteButton basePath={basePath} record={data} />
+    </TopToolbar>
+  );
+};
 
 export const BulkActionButtons = (props) => (
   <>
@@ -34,21 +39,26 @@ export const BulkActionButtons = (props) => (
 );
 
 export const CustomSlicedField = ({ record }) => {
-  if (record.message) {
-    return record ? (
+  if (record && record.message) {
+    return (
       <span>
         {record.message.length > 20
           ? `${record.message.slice(0, 20)} ...`
           : record.message}
       </span>
-    ) : null;
+    );
   }
-  if (record.bio) {
+  if (record && record.bio) {
     return record ? (
-      <span style={{ width: '200px' }}>
+      <div style={{ width: '200px' }}>
         {record.bio.length > 20 ? `${record.bio.slice(0, 20)} ...` : record.bio}
-      </span>
+      </div>
     ) : null;
   }
   return null;
 };
+
+export const CustomPagination = (props) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  <Pagination rowsPerPageOptions={[]} {...props} />
+);

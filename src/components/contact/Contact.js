@@ -9,10 +9,14 @@ import {
   SimpleShowLayout,
   EmailField,
 } from 'react-admin';
-import CustomPagination from '../Pagination';
-import { OnListToolbar, OnShowToolbar, CustomSlicedField } from '../Toolbars';
+import {
+  OnListToolbar,
+  OnShowToolbar,
+  CustomSlicedField,
+  CustomPagination,
+} from '../Helpers';
 
-const PostTitle = ({ record }) => {
+const MessageTitle = ({ record }) => {
   return (
     <span>
       {record ? `Message de ${record.firstname} ${record.lastname}` : ''}
@@ -27,7 +31,7 @@ export const messageList = (props) => {
         {...props}
         pagination={<CustomPagination />}
         title="Messages"
-        actions={<OnListToolbar create={false} />}
+        actions={<OnListToolbar />}
       >
         <Datagrid rowClick="show">
           <TextField source="firstname" label="Prénom" />
@@ -43,7 +47,7 @@ export const messageList = (props) => {
 
 export const showMessage = (props) => {
   return (
-    <Show title={<PostTitle />} {...props} actions={<OnShowToolbar />}>
+    <Show title={<MessageTitle />} {...props} actions={<OnShowToolbar />}>
       <SimpleShowLayout>
         <TextField source="firstname" label="Prénom" />
         <TextField source="lastname" label="Nom" />
