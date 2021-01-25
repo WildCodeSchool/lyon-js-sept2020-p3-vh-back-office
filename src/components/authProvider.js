@@ -11,7 +11,6 @@ export default {
     return fetch(request)
       .then((response) => {
         if (response.status === 401) {
-          console.log(response);
           throw new Error('Identifiants non reconnus');
         }
         return response;
