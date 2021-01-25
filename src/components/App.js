@@ -13,7 +13,7 @@ import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
-import { messageList, createMessage, showMessage } from './contact/Contact';
+import { messageList, showMessage } from './contact/Contact';
 import { userList, showUser, createUser, userEdit } from './user/user';
 import { sponsorsList, createSponsor, showSponsors } from './sponsors/Sponsors';
 import { wineList, createWine, showWine, wineEdit } from './Wine/Wine';
@@ -41,7 +41,6 @@ const App = () => (
         options={{ label: 'Messages' }}
         name="contact"
         list={messageList}
-        create={createMessage}
         show={showMessage}
         icon={EmailIcon}
       />

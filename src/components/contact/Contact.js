@@ -5,22 +5,11 @@ import {
   List,
   Datagrid,
   TextField,
-  Create,
   SimpleShowLayout,
-  TextInput,
-  SimpleForm,
-  TopToolbar,
-  ListButton,
-  DeleteButton,
+  EmailField,
 } from 'react-admin';
-
-// eslint-disable-next-line no-unused-vars
-const PostShowActions = ({ basePath, data, resource }) => (
-  <TopToolbar>
-    <ListButton basePath={basePath} />
-    <DeleteButton basePath={basePath} record={data} />
-  </TopToolbar>
-);
+import CustomPagination from '../Pagination';
+import { OnListToolbar, OnShowToolbar, BulkActionButtons } from '../Toolbars';
 
 const PostTitle = ({ record }) => {
   return (
@@ -33,12 +22,18 @@ const PostTitle = ({ record }) => {
 export const messageList = (props) => {
   return (
     <div>
-      <List {...props} title="Messages">
-        <Datagrid rowClick="show">
-          <TextField source="firstname" />
-          <TextField source="lastname" />
-          <TextField source="email" />
-          <TextField source="purpose" />
+      <List
+        {...props}
+        pagination={<CustomPagination />}
+        title="Messages"
+        actions={<OnListToolbar create={false} />}
+        bulkActionButtons={<BulkActionButtons />}
+      >
+        <Datagrid>
+          <TextField source="firstname" label="Prénom" />
+          <TextField source="lastname" label="Nom" />
+          <EmailField source="email" />
+          <TextField source="purpose" label="Sujet" />
           <TextField source="message" />
         </Datagrid>
       </List>
@@ -46,25 +41,9 @@ export const messageList = (props) => {
   );
 };
 
-export const createMessage = (props) => {
-  return (
-    <div>
-      <Create {...props} title="Créer un message">
-        <SimpleForm>
-          <TextInput source="firstname" />
-          <TextInput source="lastname" />
-          <TextInput source="email" />
-          <TextInput source="purpose" />
-          <TextInput source="message" />
-        </SimpleForm>
-      </Create>
-    </div>
-  );
-};
-
 export const showMessage = (props) => {
   return (
-    <Show title={<PostTitle />} {...props} actions={<PostShowActions />}>
+    <Show title={<PostTitle />} {...props} actions={<OnShowToolbar />}>
       <SimpleShowLayout>
         <TextField source="firstname" />
         <TextField source="lastname" />
