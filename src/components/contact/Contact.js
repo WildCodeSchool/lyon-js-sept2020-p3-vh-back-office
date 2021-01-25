@@ -5,11 +5,12 @@ import {
   List,
   Datagrid,
   TextField,
+  ChipField,
   SimpleShowLayout,
   EmailField,
 } from 'react-admin';
 import CustomPagination from '../Pagination';
-import { OnListToolbar, OnShowToolbar, BulkActionButtons } from '../Toolbars';
+import { OnListToolbar, OnShowToolbar, CustomSlicedField } from '../Toolbars';
 
 const PostTitle = ({ record }) => {
   return (
@@ -27,14 +28,13 @@ export const messageList = (props) => {
         pagination={<CustomPagination />}
         title="Messages"
         actions={<OnListToolbar create={false} />}
-        bulkActionButtons={<BulkActionButtons />}
       >
-        <Datagrid>
+        <Datagrid rowClick="show">
           <TextField source="firstname" label="Prénom" />
           <TextField source="lastname" label="Nom" />
           <EmailField source="email" />
-          <TextField source="purpose" label="Sujet" />
-          <TextField source="message" />
+          <ChipField source="purpose" label="Sujet" />
+          <CustomSlicedField label="Message" />
         </Datagrid>
       </List>
     </div>
@@ -45,10 +45,10 @@ export const showMessage = (props) => {
   return (
     <Show title={<PostTitle />} {...props} actions={<OnShowToolbar />}>
       <SimpleShowLayout>
-        <TextField source="firstname" />
-        <TextField source="lastname" />
-        <TextField source="email" />
-        <TextField source="purpose" />
+        <TextField source="firstname" label="Prénom" />
+        <TextField source="lastname" label="Nom" />
+        <EmailField source="email" />
+        <TextField source="purpose" label="Sujet" />
         <TextField source="message" />
       </SimpleShowLayout>
     </Show>

@@ -14,7 +14,9 @@ import {
   TopToolbar,
   ListButton,
   DeleteButton,
+  FunctionField,
 } from 'react-admin';
+import { CustomSlicedField } from '../Toolbars';
 
 // eslint-disable-next-line no-unused-vars
 const PostShowActions = ({ basePath, data, resource }) => (
@@ -36,21 +38,30 @@ const PostTitle = ({ record }) => {
 export const userList = (props) => {
   return (
     <div>
-      <List {...props} title="user">
+      <List {...props} title="Utilisateurs">
         <Datagrid rowClick="show">
-          <TextField source="firstname" />
-          <TextField source="lastname" />
+          <TextField source="firstname" label="Prenom" />
+          <TextField source="lastname" label="Nom" />
           <TextField source="email" />
-          <TextField source="password" />
-          <TextField source="password_confirmation" />
-          <TextField source="phone_number" />
-          <TextField source="bio" />
-          <TextField source="role" />
-          <TextField source="photo_url" />
-          <TextField source="website_url" />
-          <TextField source="facebook_url" />
-          <TextField source="twitter_url" />
-          <TextField source="instagram_url" />
+          <TextField source="phone_number" label="Téléphone" />
+          <CustomSlicedField label="Bio" />
+          <TextField source="role" label="Type utilisateur" />
+          <FunctionField
+            label="Lien vers la photo"
+            render={(record) => {
+              return (
+                <a
+                  href={`${process.env.REACT_APP_API_BASE_URL}/${record.photo_url}`}
+                >
+                  {record.photo_url}
+                </a>
+              );
+            }}
+          />
+          <TextField source="website_url" label="Site web" />
+          <TextField source="facebook_url" label="Facebook" />
+          <TextField source="twitter_url" label="Twitter" />
+          <TextField source="instagram_url" label="Instagram" />
         </Datagrid>
       </List>
     </div>
@@ -85,19 +96,27 @@ export const showUser = (props) => {
   return (
     <Show title={<PostTitle />} {...props} actions={<PostShowActions />}>
       <SimpleShowLayout>
-        <TextField source="firstname" />
-        <TextField source="lastname" />
+        <TextField source="firstname" label="Prenom" />
+        <TextField source="lastname" label="Nom" />
         <TextField source="email" />
-        <TextField source="password" />
-        <TextField source="password_confirmation" />
-        <TextField source="phone_number" />
+        <TextField source="phone_number" label="Téléphone" />
         <TextField source="bio" />
-        <TextField source="role" />
-        <TextField source="photo_url" />
-        <TextField source="website_url" />
-        <TextField source="facebook_url" />
-        <TextField source="twitter_url" />
-        <TextField source="instagram_url" />
+        <TextField source="role" label="Type utilisateur" />
+        <FunctionField
+          label="Aperçu de la photo"
+          render={(record) => {
+            return (
+              <img
+                alt={record.lastname}
+                src={`${process.env.REACT_APP_API_BASE_URL}/${record.photo_url}`}
+              />
+            );
+          }}
+        />
+        <TextField source="website_url" label="Site web" />
+        <TextField source="facebook_url" label="Facebook" />
+        <TextField source="twitter_url" label="Twitter" />
+        <TextField source="instagram_url" label="Instagram" />
       </SimpleShowLayout>
     </Show>
   );

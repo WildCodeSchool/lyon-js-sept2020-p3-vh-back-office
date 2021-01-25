@@ -10,6 +10,8 @@ import EventIcon from '@material-ui/icons/Event';
 import StarIcon from '@material-ui/icons/Star';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+import polyglotI18nProvider from 'ra-i18n-polyglot';
+import frenchMessages from 'ra-language-french';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
@@ -27,6 +29,7 @@ import {
 import { faqList, createFaq, showFaq, faqEdit } from './faq/Faq';
 import { reviewsList, showReview } from './Reviews/Reviews';
 
+const i18nProvider = polyglotI18nProvider(() => frenchMessages, 'fr');
 const App = () => (
   <>
     <Helmet>
@@ -36,6 +39,7 @@ const App = () => (
       dataProvider={dataProvider}
       dashboard={Dashboard}
       authProvider={authProvider}
+      i18nProvider={i18nProvider}
     >
       <Resource
         options={{ label: 'Messages' }}
@@ -45,7 +49,7 @@ const App = () => (
         icon={EmailIcon}
       />
       <Resource
-        options={{ label: 'Users' }}
+        options={{ label: 'Utilisateurs' }}
         name="users"
         list={userList}
         create={createUser}
