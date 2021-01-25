@@ -19,8 +19,16 @@ import {
   TopToolbar,
   ListButton,
   DeleteButton,
+  NumberField,
+  FunctionField,
 } from 'react-admin';
-import API from '../../services/API';
+import API from '../services/API';
+import {
+  // OnListToolbar,
+  // OnShowToolbar,
+  CustomSlicedField,
+  CustomPagination,
+} from './Helpers';
 
 // eslint-disable-next-line no-unused-vars
 const PostShowActions = ({ basePath, data, resource }) => (
@@ -42,18 +50,36 @@ const PostTitle = ({ record }) => {
 export const EventList = (props) => {
   return (
     <div>
-      <List {...props}>
+      <List {...props} pagination={<CustomPagination />}>
         <Datagrid rowClick="show">
           <DateField source="date" />
-          <TextField source="title" />
-          <TextField source="price" />
-          <TextField source="description" />
-          <TextField label="id" source="firstname" />
-          <TextField source="duration_seconds" />
+          <TextField source="title" label="Evénement" />
+          <NumberField source="price" label="Prix" />
+          <CustomSlicedField label="Description" />
+          <FunctionField
+            label="Animateur"
+            render={(record) => {
+              return (
+                <p style={{ width: '100px' }}>
+                  {`${record.firstname} ${record.lastname}`}
+                </p>
+              );
+            }}
+          />
+          <TextField source="duration_seconds" label="Durée (min)" />
           <UrlField source="main_picture_url" />
-          <TextField label="rue" source="street" />
-          <TextField source="availabilities" />
-          <TextField label="vin" source="name" />
+          <FunctionField
+            label="Adresse"
+            render={(record) => {
+              return (
+                <p style={{ width: '200px' }}>
+                  {`${record.street} ${record.city} ${record.zipcode}`}
+                </p>
+              );
+            }}
+          />
+          <TextField source="availabilities" label="Dispos" />
+          <TextField label="Vin" source="name" />
         </Datagrid>
       </List>
     </div>
@@ -116,13 +142,13 @@ export const ShowEvent = (props) => {
   return (
     <Show title={<PostTitle />} {...props} actions={<PostShowActions />}>
       <SimpleShowLayout>
-        <TextField source="date" />
-        <TextField source="title" />
-        <TextField source="price" />
+        <DateField source="date" />
+        <TextField source="title" label="Evénement" />
+        <TextField source="price" label="Prix" />
         <TextField source="description" />
         <TextField source="moderator_id" />
-        <TextField source="duration_seconds" />
-        <TextField source="main_picture_url" />
+        <TextField source="duration_seconds" label="Durée (min)" />
+        <TextField source="main_picture_url" label="Photo de l'éveénement" />
         <TextField source="address_id" />
         <TextField source="availabilities" />
         <TextField source="wine_id" />

@@ -15,12 +15,12 @@ import frenchMessages from 'ra-language-french';
 import Dashboard from './Dashboard';
 import authProvider from './authProvider';
 import dataProvider from './dataProvider';
-import { messageList, showMessage } from './contact/Contact';
-import { userList, showUser, createUser, userEdit } from './user/user';
+import { messageList, showMessage } from './Contact';
+import { userList, showUser, createUser, userEdit } from './Users';
 import { sponsorsList, createSponsor, showSponsors } from './sponsors/Sponsors';
 import { wineList, createWine, showWine, wineEdit } from './Wine/Wine';
 import { ordersList, showOrder } from './Orders/Orders';
-import { EventList, CreateEvent, ShowEvent, EventEdit } from './event/event';
+import { EventList, CreateEvent, ShowEvent, EventEdit } from './Events';
 import {
   carouselList,
   createCarousel,

@@ -55,6 +55,15 @@ export const CustomSlicedField = ({ record }) => {
       </div>
     ) : null;
   }
+  if (record && record.description) {
+    return record ? (
+      <div style={{ width: '100px' }}>
+        {record.description.length > 20
+          ? `${record.description.slice(0, 20)} ...`
+          : record.description}
+      </div>
+    ) : null;
+  }
   return null;
 };
 

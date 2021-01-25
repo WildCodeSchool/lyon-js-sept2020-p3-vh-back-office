@@ -71,6 +71,7 @@ export default {
       }));
     }
     const formData = new FormData();
+    console.log(params.data);
     for (const [key, value] of Object.entries(params.data)) {
       if (value === null) {
         formData.append(key, '');
@@ -80,7 +81,9 @@ export default {
     }
     if (params.data.image) {
       formData.delete('image');
-      formData.append('image', params.data.image.rawFile);
+      if (params.data.image.rawFile) {
+        formData.append('image', params.data.image.rawFile);
+      }
     }
     return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'PUT',
