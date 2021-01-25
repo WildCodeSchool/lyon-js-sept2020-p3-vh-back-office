@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
-
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
@@ -16,6 +16,7 @@ import { messageList, createMessage, showMessage } from './contact/Contact';
 import { userList, showUser, createUser, userEdit } from './user/user';
 import { sponsorsList, createSponsor, showSponsors } from './sponsors/Sponsors';
 import { wineList, createWine, showWine, wineEdit } from './Wine/Wine';
+import { ordersList, showOrder } from './Orders/Orders';
 import {
   carouselList,
   createCarousel,
@@ -90,6 +91,13 @@ const App = () => (
         create={createCarousel}
         show={showCarousel}
         icon={PhotoLibraryIcon}
+      />
+      <Resource
+        options={{ label: 'Commandes' }}
+        name="order"
+        list={ordersList}
+        show={showOrder}
+        icon={ShoppingBasketIcon}
       />
     </Admin>
   </>
