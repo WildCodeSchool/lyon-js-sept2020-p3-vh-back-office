@@ -4,7 +4,6 @@ import {
   Show,
   List,
   Edit,
-  EditButton,
   Datagrid,
   TextInput,
   Create,
@@ -14,47 +13,27 @@ import {
   ImageInput,
   ImageField,
   TextField,
-  UrlField,
   SimpleForm,
-  TopToolbar,
-  ListButton,
-  DeleteButton,
   NumberField,
   FunctionField,
+  DateInput,
+  NumberInput,
 } from 'react-admin';
 import API from '../services/API';
-import {
-  // OnListToolbar,
-  // OnShowToolbar,
-  CustomSlicedField,
-  CustomPagination,
-} from './Helpers';
-
-// eslint-disable-next-line no-unused-vars
-const PostShowActions = ({ basePath, data, resource }) => (
-  <TopToolbar>
-    <ListButton basePath={basePath} />
-    <EditButton basePath={basePath} record={data} />
-    <DeleteButton basePath={basePath} record={data} />
-  </TopToolbar>
-);
+import { OnShowToolbar, CustomSlicedField, CustomPagination } from './Helpers';
 
 const PostTitle = ({ record }) => {
-  return (
-    <span>
-      {record ? `Message de ${record.firstname} ${record.lastname}` : ''}
-    </span>
-  );
+  return <span>{record ? `Détail de l'évènement ${record.title} ` : ''}</span>;
 };
 
 export const EventList = (props) => {
   return (
     <div>
-      <List {...props} pagination={<CustomPagination />}>
+      <List {...props} pagination={<CustomPagination />} title="Evénements">
         <Datagrid rowClick="show">
           <DateField source="date" />
           <TextField source="title" label="Evénement" />
-          <NumberField source="price" label="Prix" />
+          <NumberField source="price" label="Prix" min={0} />
           <CustomSlicedField label="Description" />
           <FunctionField
             label="Animateur"
@@ -67,7 +46,18 @@ export const EventList = (props) => {
             }}
           />
           <TextField source="duration_seconds" label="Durée (min)" />
-          <UrlField source="main_picture_url" />
+          <FunctionField
+            label="Lien vers l'image"
+            render={(record) => {
+              return (
+                <a
+                  href={`${process.env.REACT_APP_API_BASE_URL}/${record.main_picture_url}`}
+                >
+                  {record.main_picture_url}
+                </a>
+              );
+            }}
+          />
           <FunctionField
             label="Adresse"
             render={(record) => {
@@ -105,16 +95,17 @@ export const CreateEvent = (props) => {
     <div>
       <Create {...props} title="Créer un event">
         <SimpleForm>
-          <TextInput source="date" />
-          <TextInput source="title" />
-          <TextInput source="price" />
+          <DateInput source="date" />
+          <TextInput source="title" label="Evénement" />
+          <TextInput source="price" label="Prix" />
           <TextInput source="description" />
           <SelectInput
+            label="Sélectionnez un animateur"
             source="moderator_id"
             choices={users}
-            optionText="role"
+            optionText={(record) => `${record.firstname} ${record.lastname}`}
           />
-          <TextInput source="duration_seconds" />
+          <NumberInput source="duration_seconds" label="Durée (min)" min={0} />
           <ImageInput
             source="image"
             label="Aperçu de l'image"
@@ -129,9 +120,25 @@ export const CreateEvent = (props) => {
           >
             <ImageField source="src" title="title" />
           </ImageInput>
-          <SelectInput source="address_id" choices={adress} optionText="city" />
-          <TextInput source="availabilities" />
-          <SelectInput source="wine_id" choices={wine} optionText="name" />
+          <SelectInput
+            source="address_id"
+            label="Adresse"
+            choices={adress}
+            optionText={(record) =>
+              `${record.street} ${record.zipcode} ${record.city}`
+            }
+          />
+          <NumberInput
+            source="availabilities"
+            label="Places disponibles"
+            min={0}
+          />
+          <SelectInput
+            source="wine_id"
+            choices={wine}
+            optionText="name"
+            label="Vin"
+          />
         </SimpleForm>
       </Create>
     </div>
@@ -140,18 +147,46 @@ export const CreateEvent = (props) => {
 
 export const ShowEvent = (props) => {
   return (
-    <Show title={<PostTitle />} {...props} actions={<PostShowActions />}>
+    <Show title={<PostTitle />} {...props} actions={<OnShowToolbar edit />}>
       <SimpleShowLayout>
         <DateField source="date" />
         <TextField source="title" label="Evénement" />
         <TextField source="price" label="Prix" />
         <TextField source="description" />
-        <TextField source="moderator_id" />
+        <FunctionField
+          label="Animateur"
+          render={(record) => {
+            return (
+              <p>
+                {record.firstname} {record.lastname}
+              </p>
+            );
+          }}
+        />
         <TextField source="duration_seconds" label="Durée (min)" />
-        <TextField source="main_picture_url" label="Photo de l'éveénement" />
-        <TextField source="address_id" />
-        <TextField source="availabilities" />
-        <TextField source="wine_id" />
+        <FunctionField
+          label="Aperçu de la photo"
+          render={(record) => {
+            return (
+              <img
+                alt={record.title}
+                src={`${process.env.REACT_APP_API_BASE_URL}/${record.main_picture_url}`}
+              />
+            );
+          }}
+        />
+        <FunctionField
+          label="Adresse"
+          render={(record) => {
+            return (
+              <p>
+                {record.street} {record.zipcode} {record.city}
+              </p>
+            );
+          }}
+        />
+        <TextField source="availabilities" label="Disponibilités" />
+        <TextField source="name" label="Vin" />
       </SimpleShowLayout>
     </Show>
   );
@@ -163,7 +198,7 @@ export const EventEdit = (props) => {
   const [wine, setWine] = useState([]);
 
   useEffect(() => {
-    API.get('/users').then((res) => setUsers(res.data));
+    API.get('/users/animators').then((res) => setUsers(res.data));
   }, []);
   useEffect(() => {
     API.get('/adress').then((res) => setAdress(res.data));
@@ -175,15 +210,31 @@ export const EventEdit = (props) => {
   return (
     <Edit title={<PostTitle />} {...props}>
       <SimpleForm>
-        <TextInput source="date" />
-        <TextInput source="title" />
-        <TextInput source="price" />
+        <DateInput source="date" />
+        <TextInput source="title" label="Evénement" />
+        <NumberInput source="price" label="Prix" min={0} />
         <TextInput source="description" />
-        <SelectInput source="moderator_id" choices={users} optionText="email" />
-        <TextInput source="duration_seconds" />
+        <SelectInput
+          label="Sélectionnez un animateur"
+          source="moderator_id"
+          choices={users}
+          optionText={(record) => `${record.firstname} ${record.lastname}`}
+        />
+        <NumberInput source="duration_seconds" label="Durée (min)" />
+        <FunctionField
+          label="Aperçu de la photo actuelle"
+          render={(record) => {
+            return (
+              <img
+                alt={record.title}
+                src={`${process.env.REACT_APP_API_BASE_URL}/${record.main_picture_url}`}
+              />
+            );
+          }}
+        />
         <ImageInput
           source="image"
-          label="Aperçu de l'image"
+          label="Modifier la photo"
           accept="image/*"
           placeholder={
             // eslint-disable-next-line react/jsx-wrap-multilines
@@ -195,9 +246,21 @@ export const EventEdit = (props) => {
         >
           <ImageField source="src" title="title" />
         </ImageInput>
-        <SelectInput source="address_id" choices={adress} optionText="city" />
-        <TextInput source="availabilities" />
-        <SelectInput source="wine_id" choices={wine} optionText="name" />
+        <SelectInput
+          source="address_id"
+          label="Adresse"
+          choices={adress}
+          optionText={(record) =>
+            `${record.street} ${record.zipcode} ${record.city}`
+          }
+        />
+        <NumberInput source="availabilities" label="Disponibilités" min={0} />
+        <SelectInput
+          source="wine_id"
+          choices={wine}
+          optionText="name"
+          label="Vin"
+        />
       </SimpleForm>
     </Edit>
   );

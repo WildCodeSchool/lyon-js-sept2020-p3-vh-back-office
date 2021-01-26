@@ -58,7 +58,7 @@ const App = () => (
         icon={PersonIcon}
       />
       <Resource
-        options={{ label: 'Events' }}
+        options={{ label: 'Evénements' }}
         name="events"
         list={EventList}
         create={CreateEvent}
