@@ -2,7 +2,7 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-const apiUrl = process.env.REACT_APP_API_BASE_URL;
+const apiUrl = 'http://localhost:5000';
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -56,11 +56,49 @@ export default {
     }));
   },
 
-  update: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+  update: (resource, params) => {
+    if (resource !== 'sponsors' && resource !== 'events') {
+      return httpClient(`${apiUrl}/${resource}/${params.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(params.data),
+      }).then(({ json }) => ({
+        data: { ...params.data, id: json.id },
+      }));
+    }
+    if (resource === 'events') {
+      const formData = new FormData();
+
+      formData.append('date', params.data.date);
+      formData.append('title', params.data.title);
+      formData.append('price', params.data.price);
+      formData.append('description', params.data.description);
+      formData.append('moderator_id', params.data.moderator_id);
+      formData.append('duration_seconds', params.data.duration_seconds);
+      formData.append('image', params.data.image.rawFile);
+      formData.append('address_id', params.data.address_id);
+      formData.append('availabilities', params.data.availabilities);
+      formData.append('wine_id', params.data.wine_id);
+
+      return httpClient(`${apiUrl}/${resource}/${params.id}`, {
+        method: 'PUT',
+        body: formData,
+      }).then(({ json }) => ({
+        data: { ...params.data, id: json.id },
+      }));
+    }
+
+    const formData = new FormData();
+
+    formData.append('name', params.data.name);
+    formData.append('image', params.data.image.rawFile);
+
+    return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'PUT',
-      body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json })),
+      body: formData,
+    }).then(({ json }) => ({
+      data: { ...params.data, id: json.id },
+    }));
+  },
 
   updateMany: (resource, params) => {
     const query = {
@@ -72,19 +110,32 @@ export default {
     }).then(({ json }) => ({ data: json }));
   },
 
-  // create: (resource, params) =>
-  //   httpClient(`${apiUrl}/${resource}`, {
-  //     method: 'POST',
-  //     body: JSON.stringify(params.data),
-  //   }).then(({ json }) => ({
-  //     data: { ...params.data, id: json.id },
-  //   })),
-
   create: (resource, params) => {
-    if (resource !== 'sponsors') {
+    if (resource !== 'sponsors' && resource !== 'events') {
       return httpClient(`${apiUrl}/${resource}`, {
         method: 'POST',
         body: JSON.stringify(params.data),
+      }).then(({ json }) => ({
+        data: { ...params.data, id: json.id },
+      }));
+    }
+    if (resource === 'events') {
+      const formData = new FormData();
+
+      formData.append('date', params.data.date);
+      formData.append('title', params.data.title);
+      formData.append('price', params.data.price);
+      formData.append('description', params.data.description);
+      formData.append('moderator_id', params.data.moderator_id);
+      formData.append('duration_seconds', params.data.duration_seconds);
+      formData.append('image', params.data.image.rawFile);
+      formData.append('address_id', params.data.address_id);
+      formData.append('availabilities', params.data.availabilities);
+      formData.append('wine_id', params.data.wine_id);
+
+      return httpClient(`${apiUrl}/${resource}`, {
+        method: 'POST',
+        body: formData,
       }).then(({ json }) => ({
         data: { ...params.data, id: json.id },
       }));

@@ -2,9 +2,11 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
+import EventIcon from '@material-ui/icons/Event';
 import StarIcon from '@material-ui/icons/Star';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
@@ -15,6 +17,8 @@ import { messageList, createMessage, showMessage } from './contact/Contact';
 import { userList, showUser, createUser, userEdit } from './user/user';
 import { sponsorsList, createSponsor, showSponsors } from './sponsors/Sponsors';
 import { wineList, createWine, showWine, wineEdit } from './Wine/Wine';
+import { ordersList, showOrder } from './Orders/Orders';
+import { EventList, CreateEvent, ShowEvent, EventEdit } from './event/event';
 import {
   carouselList,
   createCarousel,
@@ -49,6 +53,15 @@ const App = () => (
         show={showUser}
         edit={userEdit}
         icon={PersonIcon}
+      />
+      <Resource
+        options={{ label: 'Events' }}
+        name="events"
+        list={EventList}
+        create={CreateEvent}
+        show={ShowEvent}
+        edit={EventEdit}
+        icon={EventIcon}
       />
       <Resource
         name="sponsors"
@@ -89,6 +102,13 @@ const App = () => (
         create={createCarousel}
         show={showCarousel}
         icon={PhotoLibraryIcon}
+      />
+      <Resource
+        options={{ label: 'Commandes' }}
+        name="order"
+        list={ordersList}
+        show={showOrder}
+        icon={ShoppingBasketIcon}
       />
     </Admin>
   </>
