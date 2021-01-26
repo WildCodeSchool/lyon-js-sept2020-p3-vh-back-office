@@ -18,7 +18,11 @@ import {
   ImageField,
   AutocompleteInput,
 } from 'react-admin';
-import { CustomSlicedField, OnShowToolbar, CustomPagination } from './Helpers';
+import {
+  CustomSlicedField,
+  OnShowToolbar,
+  CustomPagination,
+} from '../services/Helpers';
 
 const Title = ({ record }) => {
   return (

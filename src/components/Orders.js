@@ -7,19 +7,9 @@ import {
   TextField,
   EmailField,
   SimpleShowLayout,
-  TopToolbar,
   NumberField,
-  ListButton,
-  DeleteButton,
 } from 'react-admin';
-
-// eslint-disable-next-line no-unused-vars
-const PostShowActions = ({ basePath, data, resource }) => (
-  <TopToolbar>
-    <ListButton basePath={basePath} />
-    <DeleteButton basePath={basePath} record={data} />
-  </TopToolbar>
-);
+import { OnShowToolbar, CustomPagination } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? `Commande n°${record.order_id}` : ''}</span>;
@@ -28,7 +18,7 @@ const PostTitle = ({ record }) => {
 export const ordersList = (props) => {
   return (
     <div>
-      <List {...props} title="Commandes">
+      <List {...props} title="Commandes" pagination={<CustomPagination />}>
         <Datagrid rowClick="show">
           <TextField source="order_id" label="Numéro de commande" />
           <TextField source="firstname" label="Prénom" />
@@ -44,7 +34,7 @@ export const ordersList = (props) => {
 
 export const showOrder = (props) => {
   return (
-    <Show title={<PostTitle />} {...props} actions={<PostShowActions />}>
+    <Show title={<PostTitle />} {...props} actions={<OnShowToolbar />}>
       <SimpleShowLayout>
         <TextField source="order_id" label="Numéro de commande" />
         <TextField source="firstname" label="Prénom" />

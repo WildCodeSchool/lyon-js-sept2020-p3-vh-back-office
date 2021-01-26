@@ -14,7 +14,7 @@ import {
   OnShowToolbar,
   CustomSlicedField,
   CustomPagination,
-} from './Helpers';
+} from '../services/Helpers';
 
 const MessageTitle = ({ record }) => {
   return (

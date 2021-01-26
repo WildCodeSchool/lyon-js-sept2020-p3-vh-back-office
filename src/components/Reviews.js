@@ -9,7 +9,11 @@ import {
   ChipField,
   EmailField,
 } from 'react-admin';
-import { OnShowToolbar, CustomSlicedField, CustomPagination } from './Helpers';
+import {
+  OnShowToolbar,
+  CustomSlicedField,
+  CustomPagination,
+} from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return (

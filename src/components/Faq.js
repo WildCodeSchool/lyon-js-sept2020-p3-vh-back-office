@@ -13,7 +13,7 @@ import {
   RichTextField,
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
-import { OnShowToolbar, CustomPagination } from './Helpers';
+import { OnShowToolbar, CustomPagination } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? record.faq_title : ''}</span>;

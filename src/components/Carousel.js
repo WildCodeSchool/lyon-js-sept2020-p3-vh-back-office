@@ -13,7 +13,11 @@ import {
   ImageInput,
   ImageField,
 } from 'react-admin';
-import { OnShowToolbar, CustomSlicedField, CustomPagination } from './Helpers';
+import {
+  OnShowToolbar,
+  CustomSlicedField,
+  CustomPagination,
+} from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? `Fiche de la slide ${record.name}` : ''}</span>;

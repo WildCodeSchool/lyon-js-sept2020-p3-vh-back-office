@@ -20,7 +20,11 @@ import {
   NumberInput,
 } from 'react-admin';
 import API from '../services/API';
-import { OnShowToolbar, CustomSlicedField, CustomPagination } from './Helpers';
+import {
+  OnShowToolbar,
+  CustomSlicedField,
+  CustomPagination,
+} from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? `Détail de l'évènement ${record.title} ` : ''}</span>;

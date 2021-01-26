@@ -13,8 +13,8 @@ import LiveHelpIcon from '@material-ui/icons/LiveHelp';
 import polyglotI18nProvider from 'ra-i18n-polyglot';
 import frenchMessages from 'ra-language-french';
 import Dashboard from './Dashboard';
-import authProvider from './authProvider';
-import dataProvider from './dataProvider';
+import authProvider from '../providers/authProvider';
+import dataProvider from '../providers/dataProvider';
 import { messageList, showMessage } from './Contact';
 import { userList, showUser, createUser, userEdit } from './Users';
 import {
@@ -24,7 +24,7 @@ import {
   editSponsor,
 } from './Sponsors';
 import { wineList, createWine, showWine, wineEdit } from './Wines';
-import { ordersList, showOrder } from './Orders/Orders';
+import { ordersList, showOrder } from './Orders';
 import { EventList, CreateEvent, ShowEvent, EventEdit } from './Events';
 import { carouselList, createCarousel, showCarousel } from './Carousel';
 import { faqList, createFaq, showFaq, faqEdit } from './Faq';

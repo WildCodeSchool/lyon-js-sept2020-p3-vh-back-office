@@ -18,7 +18,7 @@ import {
   ImageField,
   NumberInput,
 } from 'react-admin';
-import { CustomPagination, OnShowToolbar } from './Helpers';
+import { CustomPagination, OnShowToolbar } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return (

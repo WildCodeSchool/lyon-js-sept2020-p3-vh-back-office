@@ -15,7 +15,11 @@ import {
   SimpleForm,
   FunctionField,
 } from 'react-admin';
-import { OnShowToolbar, OnListToolbar, CustomPagination } from './Helpers';
+import {
+  OnShowToolbar,
+  OnListToolbar,
+  CustomPagination,
+} from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? `Fiche du partenaire ${record.name} ` : ''}</span>;
