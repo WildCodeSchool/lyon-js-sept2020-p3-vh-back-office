@@ -26,11 +26,7 @@ import {
 import { wineList, createWine, showWine, wineEdit } from './Wines';
 import { ordersList, showOrder } from './Orders/Orders';
 import { EventList, CreateEvent, ShowEvent, EventEdit } from './Events';
-import {
-  carouselList,
-  createCarousel,
-  showCarousel,
-} from './Carousel/Carousel';
+import { carouselList, createCarousel, showCarousel } from './Carousel';
 import { faqList, createFaq, showFaq, faqEdit } from './Faq';
 import { reviewsList, showReview } from './Reviews';
 
@@ -106,7 +102,7 @@ const App = () => (
         icon={StarIcon}
       />
       <Resource
-        options={{ label: 'Carousel' }}
+        options={{ label: 'Carrousel' }}
         name="carrousel"
         list={carouselList}
         create={createCarousel}

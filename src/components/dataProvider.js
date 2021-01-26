@@ -110,7 +110,8 @@ export default {
       resource !== 'sponsors' &&
       resource !== 'events' &&
       resource !== 'users' &&
-      resource !== 'products'
+      resource !== 'products' &&
+      resource !== 'carrousel'
     ) {
       return httpClient(`${apiUrl}/${resource}`, {
         method: 'POST',
