@@ -13,14 +13,16 @@ import { OnShowToolbar, CustomSlicedField, CustomPagination } from './Helpers';
 
 const PostTitle = ({ record }) => {
   return (
-    <span>{record ? `Ratings: ${record.firstname} ${record.rating}` : ''}</span>
+    <span>
+      {record ? `Avis de ${record.firstname} ${record.lastname}` : ''}
+    </span>
   );
 };
 
 export const reviewsList = (props) => {
   return (
     <div>
-      <List {...props} title="Reviews" pagination={<CustomPagination />}>
+      <List {...props} title="Avis clients" pagination={<CustomPagination />}>
         <Datagrid rowClick="show">
           <TextField source="firstname" label="Prénom" />
           <TextField source="lastname" label="Nom" />
