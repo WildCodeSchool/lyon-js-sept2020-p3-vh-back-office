@@ -14,7 +14,10 @@ import {
   ListButton,
   EditButton,
   DeleteButton,
+  RichTextField,
 } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
+import { OnShowToolbar, CustomPagination } from './Helpers';
 
 // eslint-disable-next-line no-unused-vars
 const PostShowActions = ({ basePath, data, resource }) => (
@@ -32,10 +35,10 @@ const PostTitle = ({ record }) => {
 export const faqList = (props) => {
   return (
     <div>
-      <List {...props} title="FAQ">
+      <List {...props} title="FAQ" pagination={<CustomPagination />}>
         <Datagrid rowClick="show">
-          <TextField source="faq_title" />
-          <TextField source="faq_content" />
+          <TextField source="faq_title" label="Question" />
+          <RichTextField source="faq_content" label="Réponse" />
         </Datagrid>
       </List>
     </div>
@@ -47,8 +50,8 @@ export const createFaq = (props) => {
     <div>
       <Create {...props} title="Créer une question">
         <SimpleForm>
-          <TextInput source="faq_title" />
-          <TextInput source="faq_content" />
+          <TextInput source="faq_title" label="Question" />
+          <RichTextInput source="faq_content" label="Réponse" />
         </SimpleForm>
       </Create>
     </div>
@@ -57,10 +60,10 @@ export const createFaq = (props) => {
 
 export const showFaq = (props) => {
   return (
-    <Show title={<PostTitle />} {...props} actions={<PostShowActions />}>
+    <Show title={<PostTitle />} {...props} actions={<OnShowToolbar edit />}>
       <SimpleShowLayout>
-        <TextField source="faq_title" />
-        <TextField source="faq_content" />
+        <TextField source="faq_title" label="Question" />
+        <RichTextField source="faq_content" label="Réponse" />
       </SimpleShowLayout>
     </Show>
   );
@@ -69,8 +72,8 @@ export const showFaq = (props) => {
 export const faqEdit = (props) => (
   <Edit title={<PostTitle />} {...props}>
     <SimpleForm>
-      <TextInput source="faq_title" />
-      <TextInput source="faq_content" />
+      <TextInput source="faq_title" label="Question" />
+      <RichTextInput source="faq_content" label="Réponse" />
     </SimpleForm>
   </Edit>
 );

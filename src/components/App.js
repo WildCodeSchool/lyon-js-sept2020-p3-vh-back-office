@@ -31,7 +31,7 @@ import {
   createCarousel,
   showCarousel,
 } from './Carousel/Carousel';
-import { faqList, createFaq, showFaq, faqEdit } from './faq/Faq';
+import { faqList, createFaq, showFaq, faqEdit } from './Faq';
 import { reviewsList, showReview } from './Reviews/Reviews';
 
 const i18nProvider = polyglotI18nProvider(() => frenchMessages, 'fr');
@@ -90,7 +90,7 @@ const App = () => (
         icon={LocalBarIcon}
       />
       <Resource
-        options={{ label: 'Faq' }}
+        options={{ label: 'FAQ' }}
         name="faq"
         list={faqList}
         create={createFaq}
