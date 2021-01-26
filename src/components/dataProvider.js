@@ -82,6 +82,8 @@ export default {
       formData.delete('image');
       if (params.data.image.rawFile) {
         formData.append('image', params.data.image.rawFile);
+      } else {
+        formData.append('image', params.data.image);
       }
     }
     return httpClient(`${apiUrl}/${resource}/${params.id}`, {

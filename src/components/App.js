@@ -17,7 +17,12 @@ import authProvider from './authProvider';
 import dataProvider from './dataProvider';
 import { messageList, showMessage } from './Contact';
 import { userList, showUser, createUser, userEdit } from './Users';
-import { sponsorsList, createSponsor, showSponsors } from './sponsors/Sponsors';
+import {
+  sponsorsList,
+  createSponsor,
+  showSponsors,
+  editSponsor,
+} from './Sponsors';
 import { wineList, createWine, showWine, wineEdit } from './Wine/Wine';
 import { ordersList, showOrder } from './Orders/Orders';
 import { EventList, CreateEvent, ShowEvent, EventEdit } from './Events';
@@ -67,10 +72,12 @@ const App = () => (
         icon={EventIcon}
       />
       <Resource
+        options={{ label: 'Partenaires' }}
         name="sponsors"
         list={sponsorsList}
         create={createSponsor}
         show={showSponsors}
+        edit={editSponsor}
         icon={BusinessCenterIcon}
       />
       <Resource
