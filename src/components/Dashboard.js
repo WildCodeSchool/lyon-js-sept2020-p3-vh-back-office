@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader } from '@material-ui/core';
 import {
   userListDahsboard,
   reviewsListDashboard,
+  messageListDashboard,
 } from './Dashboard/DashboardContent';
 
 export default () => (
@@ -32,6 +33,18 @@ export default () => (
           options={{ label: 'Reviews' }}
           name="reviews"
           list={reviewsListDashboard}
+        />
+      </CardContent>
+    </Card>
+
+    <Card>
+      <CardHeader title="Derniers Messages" />
+      <CardContent>
+        {' '}
+        <Resource
+          options={{ label: 'Messages' }}
+          name="contact"
+          list={messageListDashboard}
         />
       </CardContent>
     </Card>

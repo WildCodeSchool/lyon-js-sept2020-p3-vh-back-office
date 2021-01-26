@@ -38,3 +38,23 @@ export const reviewsListDashboard = (props) => {
     </div>
   );
 };
+
+export const messageListDashboard = (props) => {
+  return (
+    <div>
+      <List
+        {...props}
+        title="Messages"
+        actions={false}
+        bulkActionButtons={false}
+        pagination={false}
+      >
+        <Datagrid rowClick="show">
+          <TextField source="firstname" />
+          <TextField source="lastname" />
+          <TextField source="purpose" />
+        </Datagrid>
+      </List>
+    </div>
+  );
+};
