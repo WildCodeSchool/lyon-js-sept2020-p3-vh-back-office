@@ -23,7 +23,7 @@ import {
   showSponsors,
   editSponsor,
 } from './Sponsors';
-import { wineList, createWine, showWine, wineEdit } from './Wine/Wine';
+import { wineList, createWine, showWine, wineEdit } from './Wines';
 import { ordersList, showOrder } from './Orders/Orders';
 import { EventList, CreateEvent, ShowEvent, EventEdit } from './Events';
 import {
@@ -81,7 +81,7 @@ const App = () => (
         icon={BusinessCenterIcon}
       />
       <Resource
-        options={{ label: 'Wines' }}
+        options={{ label: 'Vins' }}
         name="products"
         list={wineList}
         create={createWine}

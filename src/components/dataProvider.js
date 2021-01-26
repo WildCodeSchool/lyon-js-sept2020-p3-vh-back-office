@@ -61,7 +61,8 @@ export default {
     if (
       resource !== 'sponsors' &&
       resource !== 'events' &&
-      resource !== 'users'
+      resource !== 'users' &&
+      resource !== 'products'
     ) {
       return httpClient(`${apiUrl}/${resource}/${params.id}`, {
         method: 'PUT',
@@ -108,7 +109,8 @@ export default {
     if (
       resource !== 'sponsors' &&
       resource !== 'events' &&
-      resource !== 'users'
+      resource !== 'users' &&
+      resource !== 'products'
     ) {
       return httpClient(`${apiUrl}/${resource}`, {
         method: 'POST',

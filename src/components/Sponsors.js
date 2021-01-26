@@ -15,7 +15,7 @@ import {
   SimpleForm,
   FunctionField,
 } from 'react-admin';
-import { OnShowToolbar, OnListToolbar } from './Helpers';
+import { OnShowToolbar, OnListToolbar, CustomPagination } from './Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? `Fiche du partenaire ${record.name} ` : ''}</span>;
@@ -24,7 +24,12 @@ const PostTitle = ({ record }) => {
 export const sponsorsList = (props) => {
   return (
     <div>
-      <List {...props} title="Sponsors" actions={<OnListToolbar create />}>
+      <List
+        {...props}
+        title="Sponsors"
+        actions={<OnListToolbar create />}
+        pagination={<CustomPagination />}
+      >
         <Datagrid rowClick="show">
           <TextField source="name" label="Nom du partenaire" />
           <FunctionField
