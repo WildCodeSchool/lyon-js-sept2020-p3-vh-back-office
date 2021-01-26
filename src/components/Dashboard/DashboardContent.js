@@ -1,12 +1,13 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { List, Datagrid, TextField } from 'react-admin';
+import { List, Datagrid, TextField, DateField, SimpleList } from 'react-admin';
 
 export const userListDahsboard = (props) => {
   return (
     <div>
       <List
         {...props}
+        title=" "
         actions={false}
         bulkActionButtons={false}
         pagination={false}
@@ -25,15 +26,15 @@ export const reviewsListDashboard = (props) => {
     <div>
       <List
         {...props}
-        title="Reviews"
+        title=" "
         actions={false}
         bulkActionButtons={false}
         pagination={false}
       >
-        <Datagrid rowClick="show">
+        <SimpleList rowClick="show">
           <TextField source="title" />
           <TextField source="rating" />
-        </Datagrid>
+        </SimpleList>
       </List>
     </div>
   );
@@ -44,7 +45,8 @@ export const messageListDashboard = (props) => {
     <div>
       <List
         {...props}
-        title="Messages"
+        /* ---------------- title = title displayed on the 'dashboard' menu --------------- */
+        title="Bienvenue sur le dashboard d'Hypnose & Vins"
         actions={false}
         bulkActionButtons={false}
         pagination={false}
@@ -53,6 +55,28 @@ export const messageListDashboard = (props) => {
           <TextField source="firstname" />
           <TextField source="lastname" />
           <TextField source="purpose" />
+        </Datagrid>
+      </List>
+    </div>
+  );
+};
+
+export const EventListDashboard = (props) => {
+  return (
+    <div>
+      <List
+        {...props}
+        title=" "
+        actions={false}
+        bulkActionButtons={false}
+        pagination={false}
+      >
+        <Datagrid rowClick="show">
+          <TextField source="title" />
+          <DateField source="date" />
+          <TextField label="id" source="firstname" />
+          <TextField label="rue" source="city" />
+          <TextField source="availabilities" />
         </Datagrid>
       </List>
     </div>
