@@ -11,6 +11,7 @@ import {
   TextInput,
   SimpleForm,
   RichTextField,
+  required,
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 import { OnShowToolbar, CustomPagination } from '../services/Helpers';
@@ -37,8 +38,16 @@ export const createFaq = (props) => {
     <div>
       <Create {...props} title="Créer une question">
         <SimpleForm>
-          <TextInput source="faq_title" label="Question" />
-          <RichTextInput source="faq_content" label="Réponse" />
+          <TextInput
+            source="faq_title"
+            label="Question"
+            validate={[required()]}
+          />
+          <RichTextInput
+            source="faq_content"
+            label="Réponse"
+            validate={[required()]}
+          />
         </SimpleForm>
       </Create>
     </div>
@@ -59,8 +68,12 @@ export const showFaq = (props) => {
 export const faqEdit = (props) => (
   <Edit title={<PostTitle />} {...props}>
     <SimpleForm>
-      <TextInput source="faq_title" label="Question" />
-      <RichTextInput source="faq_content" label="Réponse" />
+      <TextInput source="faq_title" label="Question" validate={[required()]} />
+      <RichTextInput
+        source="faq_content"
+        label="Réponse"
+        validate={[required()]}
+      />
     </SimpleForm>
   </Edit>
 );

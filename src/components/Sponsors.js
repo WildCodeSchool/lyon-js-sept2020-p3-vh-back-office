@@ -14,6 +14,7 @@ import {
   ImageField,
   SimpleForm,
   FunctionField,
+  required,
 } from 'react-admin';
 import {
   OnShowToolbar,
@@ -61,17 +62,16 @@ export const createSponsor = (props) => {
     <div>
       <Create {...props} title="Créer un sponsor">
         <SimpleForm>
-          <TextInput source="name" label="Nom du partenaire" />
+          <TextInput
+            source="name"
+            label="Nom du partenaire"
+            validate={[required()]}
+          />
           <ImageInput
             source="image"
             label="Aperçu de l'image"
             accept="image/*"
-            placeholder={
-              <p>
-                Vous pouvez glisser/déposer un fichier ici ou cliquer pour
-                parcourir
-              </p>
-            }
+            validate={[required()]}
           >
             <ImageField source="src" title="title" />
           </ImageInput>
@@ -86,7 +86,11 @@ export const editSponsor = (props) => {
     <div>
       <Edit {...props} title="Créer un sponsor">
         <SimpleForm>
-          <TextInput source="name" label="Nom du partenaire" />
+          <TextInput
+            source="name"
+            label="Nom du partenaire"
+            validate={[required()]}
+          />
           <FunctionField
             label="Aperçu de l'image actuelle'"
             render={(record) => {
@@ -98,17 +102,7 @@ export const editSponsor = (props) => {
               );
             }}
           />
-          <ImageInput
-            source="image"
-            label="Changer d'image"
-            accept="image/*"
-            placeholder={
-              <p>
-                Vous pouvez glisser/déposer un fichier ici ou cliquer pour
-                parcourir
-              </p>
-            }
-          >
+          <ImageInput source="image" label="Changer d'image" accept="image/*">
             <ImageField source="src" title="title" />
           </ImageInput>
         </SimpleForm>

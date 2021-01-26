@@ -17,6 +17,7 @@ import {
   ImageInput,
   ImageField,
   NumberInput,
+  required,
 } from 'react-admin';
 import { CustomPagination, OnShowToolbar } from '../services/Helpers';
 
@@ -39,20 +40,6 @@ export const wineList = (props) => {
           <TextField source="arome" label="Arômes" />
           <NumberField source="price" label="Prix" />
           <TextField source="sommelier" />
-          <FunctionField
-            label="Lien vers l'image"
-            render={(record) => {
-              return (
-                typeof record.image === 'string' && (
-                  <a
-                    href={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
-                  >
-                    {record.image}
-                  </a>
-                )
-              );
-            }}
-          />
           <UrlField source="website" label="Site du producteur" />
           <TextField source="specificities" label="Spécificités" />
           <TextField source="producteur" />
@@ -67,18 +54,23 @@ export const createWine = (props) => {
     <div>
       <Create {...props} title="Ajouter un vin">
         <SimpleForm>
-          <TextInput source="name" />
-          <TextInput source="vigneron" />
-          <TextInput source="cepage" />
-          <TextInput source="arome" />
-          <TextInput source="price" />
-          <TextInput source="sommelier" />
-          <ImageInput source="image" label="Aperçu de l'image" accept="image/*">
+          <TextInput source="name" validate={[required()]} />
+          <TextInput source="vigneron" validate={[required()]} />
+          <TextInput source="cepage" validate={[required()]} />
+          <TextInput source="arome" label="Arômes" validate={[required()]} />
+          <NumberInput source="price" label="Prix" validate={[required()]} />
+          <TextInput source="sommelier" validate={[required()]} />
+          <ImageInput
+            source="image"
+            label="Aperçu de l'image"
+            accept="image/*"
+            validate={[required()]}
+          >
             <ImageField source="src" title="title" />
           </ImageInput>
-          <TextInput source="website" />
-          <TextInput source="specificities" />
-          <TextInput source="producteur" />
+          <TextInput source="website" label="Site du producteur" />
+          <TextInput source="specificities" label="Spécificités" />
+          <TextInput source="producteur" validate={[required()]} />
         </SimpleForm>
       </Create>
     </div>
@@ -117,14 +109,14 @@ export const showWine = (props) => {
 export const wineEdit = (props) => (
   <Edit title={<PostTitle />} {...props}>
     <SimpleForm>
-      <TextInput source="name" />
-      <TextInput source="vigneron" />
-      <TextInput source="cepage" />
-      <TextInput source="arome" label="Arômes" />
-      <NumberInput source="price" label="Prix" />
-      <TextInput source="sommelier" />
+      <TextInput source="name" validate={[required()]} />
+      <TextInput source="vigneron" validate={[required()]} />
+      <TextInput source="cepage" validate={[required()]} />
+      <TextInput source="arome" label="Arômes" validate={[required()]} />
+      <NumberInput source="price" label="Prix" validate={[required()]} />
+      <TextInput source="sommelier" validate={[required()]} />
       <FunctionField
-        label="Aperçu de l'image actuelle'"
+        label="Aperçu de l'image actuelle"
         render={(record) => {
           return (
             <img
@@ -139,7 +131,7 @@ export const wineEdit = (props) => (
       </ImageInput>
       <TextInput source="website" label="Site du producteur" />
       <TextInput source="specificities" label="Spécificités" />
-      <TextInput source="producteur" />
+      <TextInput source="producteur" validate={[required()]} />
     </SimpleForm>
   </Edit>
 );

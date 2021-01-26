@@ -12,6 +12,7 @@ import {
   FunctionField,
   ImageInput,
   ImageField,
+  required,
 } from 'react-admin';
 import {
   OnShowToolbar,
@@ -53,13 +54,23 @@ export const createCarousel = (props) => {
     <div>
       <Create {...props} title="Ajouter une image">
         <SimpleForm>
-          <TextInput source="name" label="Nom de la slide" />
           <TextInput
+            source="name"
+            label="Nom de la slide"
+            validate={[required()]}
+          />
+          <TextInput
+            validate={[required()]}
             multiline
             source="description"
             label="Description (apparait sur la slide)"
           />
-          <ImageInput source="image" label="Ajouter une image" accept="image/*">
+          <ImageInput
+            source="image"
+            label="Ajouter une image"
+            accept="image/*"
+            validate={[required()]}
+          >
             <ImageField source="src" title="title" />
           </ImageInput>
         </SimpleForm>

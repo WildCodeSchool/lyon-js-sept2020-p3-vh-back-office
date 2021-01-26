@@ -17,6 +17,7 @@ import {
   ImageInput,
   ImageField,
   AutocompleteInput,
+  required,
 } from 'react-admin';
 import {
   CustomSlicedField,
@@ -55,10 +56,6 @@ export const userList = (props) => {
               );
             }}
           />
-          {/* <UrlField source="website_url" label="Site web" />
-          <UrlField source="facebook_url" label="Facebook" />
-          <UrlField source="twitter_url" label="Twitter" />
-          <UrlField source="instagram_url" label="Instagram" /> */}
         </Datagrid>
       </List>
     </div>
@@ -68,13 +65,22 @@ export const userList = (props) => {
 export const createUser = (props) => {
   return (
     <div>
-      <Create {...props} title="Créer un user">
+      <Create {...props} title="Créer un utilisateur">
         <SimpleForm>
-          <TextInput source="firstname" label="Prenom" />
-          <TextInput source="lastname" label="Nom" />
-          <TextInput source="email" />
-          <PasswordInput source="password" label="Mot de passe" />
+          <TextInput
+            source="firstname"
+            label="Prenom"
+            validate={[required()]}
+          />
+          <TextInput source="lastname" label="Nom" validate={[required()]} />
+          <TextInput source="email" validate={[required()]} />
           <PasswordInput
+            source="password"
+            label="Mot de passe"
+            validate={[required()]}
+          />
+          <PasswordInput
+            validate={[required()]}
             source="password_confirmation"
             label="Confirmer le mot de passe"
           />
@@ -87,18 +93,7 @@ export const createUser = (props) => {
               { id: 'customer', name: 'Client' },
             ]}
           />
-          <ImageInput
-            source="image"
-            label="Aperçu de l'image"
-            accept="image/*"
-            placeholder={
-              // eslint-disable-next-line react/jsx-wrap-multilines
-              <p>
-                Vous pouvez glisser/déposer un fichier ici ou cliquer pour
-                parcourir
-              </p>
-            }
-          >
+          <ImageInput source="image" label="Aperçu de l'image" accept="image/*">
             <ImageField source="src" title="title" />
           </ImageInput>
           <TextInput source="website_url" label="Site web" />
@@ -144,9 +139,9 @@ export const showUser = (props) => {
 export const userEdit = (props) => (
   <Edit title={<Title />} {...props}>
     <SimpleForm>
-      <TextInput source="firstname" label="Prenom" />
-      <TextInput source="lastname" label="Nom" />
-      <TextInput source="email" />
+      <TextInput source="firstname" label="Prenom" validate={[required()]} />
+      <TextInput source="lastname" label="Nom" validate={[required()]} />
+      <TextInput source="email" validate={[required()]} />
       <TextInput source="phone_number" />
       <TextInput source="bio" />
       <TextInput source="role" label="Type utilisateur" />
@@ -161,17 +156,7 @@ export const userEdit = (props) => (
           );
         }}
       />
-      <ImageInput
-        source="image"
-        label="Changer la photo"
-        accept="image/*"
-        placeholder={
-          // eslint-disable-next-line react/jsx-wrap-multilines
-          <p>
-            Vous pouvez glisser/déposer un fichier ici ou cliquer pour parcourir
-          </p>
-        }
-      >
+      <ImageInput source="image" label="Changer la photo" accept="image/*">
         <ImageField source="src" title="title" />
       </ImageInput>
       <TextInput source="website_url" label="Site web" />

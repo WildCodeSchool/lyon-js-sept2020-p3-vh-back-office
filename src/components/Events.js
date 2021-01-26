@@ -18,6 +18,7 @@ import {
   FunctionField,
   DateInput,
   NumberInput,
+  required,
 } from 'react-admin';
 import API from '../services/API';
 import {
@@ -50,18 +51,6 @@ export const EventList = (props) => {
             }}
           />
           <TextField source="duration_seconds" label="Durée (min)" />
-          <FunctionField
-            label="Lien vers l'image"
-            render={(record) => {
-              return (
-                <a
-                  href={`${process.env.REACT_APP_API_BASE_URL}/${record.main_picture_url}`}
-                >
-                  {record.main_picture_url}
-                </a>
-              );
-            }}
-          />
           <FunctionField
             label="Adresse"
             render={(record) => {
@@ -99,32 +88,33 @@ export const CreateEvent = (props) => {
     <div>
       <Create {...props} title="Créer un event">
         <SimpleForm>
-          <DateInput source="date" />
-          <TextInput source="title" label="Evénement" />
-          <TextInput source="price" label="Prix" />
-          <TextInput source="description" />
+          <DateInput source="date" validate={[required()]} />
+          <TextInput source="title" label="Evénement" validate={[required()]} />
+          <TextInput source="price" label="Prix" validate={[required()]} />
+          <TextInput source="description" validate={[required()]} />
           <SelectInput
+            validate={[required()]}
             label="Sélectionnez un animateur"
             source="moderator_id"
             choices={users}
             optionText={(record) => `${record.firstname} ${record.lastname}`}
           />
-          <NumberInput source="duration_seconds" label="Durée (min)" min={0} />
+          <NumberInput
+            source="duration_seconds"
+            label="Durée (min)"
+            min={0}
+            validate={[required()]}
+          />
           <ImageInput
+            validate={[required()]}
             source="image"
             label="Aperçu de l'image"
             accept="image/*"
-            placeholder={
-              // eslint-disable-next-line react/jsx-wrap-multilines
-              <p>
-                Vous pouvez glisser/déposer un fichier ici ou cliquer pour
-                parcourir
-              </p>
-            }
           >
             <ImageField source="src" title="title" />
           </ImageInput>
           <SelectInput
+            validate={[required()]}
             source="address_id"
             label="Adresse"
             choices={adress}
@@ -133,11 +123,13 @@ export const CreateEvent = (props) => {
             }
           />
           <NumberInput
+            validate={[required()]}
             source="availabilities"
             label="Places disponibles"
             min={0}
           />
           <SelectInput
+            validate={[required()]}
             source="wine_id"
             choices={wine}
             optionText="name"
@@ -214,17 +206,27 @@ export const EventEdit = (props) => {
   return (
     <Edit title={<PostTitle />} {...props}>
       <SimpleForm>
-        <DateInput source="date" />
-        <TextInput source="title" label="Evénement" />
-        <NumberInput source="price" label="Prix" min={0} />
-        <TextInput source="description" />
+        <DateInput source="date" validate={[required()]} />
+        <TextInput source="title" label="Evénement" validate={[required()]} />
+        <NumberInput
+          source="price"
+          label="Prix"
+          min={0}
+          validate={[required()]}
+        />
+        <TextInput source="description" validate={[required()]} />
         <SelectInput
+          validate={[required()]}
           label="Sélectionnez un animateur"
           source="moderator_id"
           choices={users}
           optionText={(record) => `${record.firstname} ${record.lastname}`}
         />
-        <NumberInput source="duration_seconds" label="Durée (min)" />
+        <NumberInput
+          source="duration_seconds"
+          label="Durée (min)"
+          validate={[required()]}
+        />
         <FunctionField
           label="Aperçu de la photo actuelle"
           render={(record) => {
@@ -236,21 +238,11 @@ export const EventEdit = (props) => {
             );
           }}
         />
-        <ImageInput
-          source="image"
-          label="Modifier la photo"
-          accept="image/*"
-          placeholder={
-            // eslint-disable-next-line react/jsx-wrap-multilines
-            <p>
-              Vous pouvez glisser/déposer un fichier ici ou cliquer pour
-              parcourir
-            </p>
-          }
-        >
-          <ImageField source="src" title="title" />
+        <ImageInput source="image" label="Modifier la photo" accept="image/*">
+          <ImageField source="src" title="title" validate={[required()]} />
         </ImageInput>
         <SelectInput
+          validate={[required()]}
           source="address_id"
           label="Adresse"
           choices={adress}
@@ -258,8 +250,14 @@ export const EventEdit = (props) => {
             `${record.street} ${record.zipcode} ${record.city}`
           }
         />
-        <NumberInput source="availabilities" label="Disponibilités" min={0} />
+        <NumberInput
+          source="availabilities"
+          label="Disponibilités"
+          min={0}
+          validate={[required()]}
+        />
         <SelectInput
+          validate={[required()]}
           source="wine_id"
           choices={wine}
           optionText="name"
