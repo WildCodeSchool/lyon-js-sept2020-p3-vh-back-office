@@ -6,6 +6,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import PersonIcon from '@material-ui/icons/Person';
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
+import RoomIcon from '@material-ui/icons/Room';
 import EventIcon from '@material-ui/icons/Event';
 import StarIcon from '@material-ui/icons/Star';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
@@ -17,6 +18,12 @@ import authProvider from '../providers/authProvider';
 import dataProvider from '../providers/dataProvider';
 import { messageList, showMessage } from './Contact';
 import { userList, showUser, createUser, userEdit } from './Users';
+import {
+  addressList,
+  addressShow,
+  addressEdit,
+  addressCreate,
+} from './Address';
 import {
   sponsorsList,
   createSponsor,
@@ -115,6 +122,15 @@ const App = () => (
         list={ordersList}
         show={showOrder}
         icon={ShoppingBasketIcon}
+      />
+      <Resource
+        options={{ label: 'Adresses' }}
+        name="adress"
+        list={addressList}
+        show={addressShow}
+        create={addressCreate}
+        edit={addressEdit}
+        icon={RoomIcon}
       />
     </Admin>
   </>
