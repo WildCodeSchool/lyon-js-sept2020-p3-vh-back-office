@@ -32,7 +32,7 @@ import {
   showCarousel,
 } from './Carousel/Carousel';
 import { faqList, createFaq, showFaq, faqEdit } from './Faq';
-import { reviewsList, showReview } from './Reviews/Reviews';
+import { reviewsList, showReview } from './Reviews';
 
 const i18nProvider = polyglotI18nProvider(() => frenchMessages, 'fr');
 const App = () => (
@@ -99,7 +99,7 @@ const App = () => (
         icon={LiveHelpIcon}
       />
       <Resource
-        options={{ label: 'Reviews' }}
+        options={{ label: 'Avis clients' }}
         name="reviews"
         list={reviewsList}
         show={showReview}

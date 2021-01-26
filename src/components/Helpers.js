@@ -64,6 +64,15 @@ export const CustomSlicedField = ({ record }) => {
       </div>
     ) : null;
   }
+  if (record && record.comment) {
+    return record ? (
+      <div style={{ width: '200px' }}>
+        {record.comment.length > 20
+          ? `${record.comment.slice(0, 20)} ...`
+          : record.comment}
+      </div>
+    ) : null;
+  }
   return null;
 };
 
