@@ -2,29 +2,37 @@
 import React from 'react';
 import { List, Datagrid, TextField } from 'react-admin';
 
-// eslint-disable-next-line
-export const wineListDashboard = (props) => {
+export const userListDahsboard = (props) => {
   return (
     <div>
-      <List {...props} title="Wines">
+      <List
+        {...props}
+        actions={false}
+        bulkActionButtons={false}
+        pagination={false}
+      >
         <Datagrid rowClick="show">
-          <TextField source="name" />
-          <TextField source="vigneron" />
-          <TextField source="cepage" />
+          <TextField source="firstname" />
+          <TextField source="lastname" />
         </Datagrid>
       </List>
     </div>
   );
 };
 
-export const userListDahsboard = (props) => {
+export const reviewsListDashboard = (props) => {
   return (
     <div>
-      <List {...props} title="user">
+      <List
+        {...props}
+        title="Reviews"
+        actions={false}
+        bulkActionButtons={false}
+        pagination={false}
+      >
         <Datagrid rowClick="show">
-          <TextField source="firstname" />
-          <TextField source="lastname" />
-          <TextField source="email" />
+          <TextField source="title" />
+          <TextField source="rating" />
         </Datagrid>
       </List>
     </div>
