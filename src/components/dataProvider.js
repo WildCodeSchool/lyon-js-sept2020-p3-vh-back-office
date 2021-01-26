@@ -71,7 +71,6 @@ export default {
       }));
     }
     const formData = new FormData();
-    console.log(params.data);
     for (const [key, value] of Object.entries(params.data)) {
       if (value === null) {
         formData.append(key, '');

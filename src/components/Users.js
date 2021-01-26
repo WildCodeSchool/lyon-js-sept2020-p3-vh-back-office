@@ -146,9 +146,20 @@ export const userEdit = (props) => (
       <TextInput source="phone_number" />
       <TextInput source="bio" />
       <TextInput source="role" label="Type utilisateur" />
+      <FunctionField
+        label="Aperçu de la photo actuelle"
+        render={(record) => {
+          return (
+            <img
+              alt={record.lastname}
+              src={`${process.env.REACT_APP_API_BASE_URL}/${record.photo_url}`}
+            />
+          );
+        }}
+      />
       <ImageInput
         source="image"
-        label="Aperçu de l'image"
+        label="Changer la photo"
         accept="image/*"
         placeholder={
           // eslint-disable-next-line react/jsx-wrap-multilines
