@@ -10,26 +10,13 @@ import {
   SimpleShowLayout,
   TextInput,
   SimpleForm,
-  TopToolbar,
-  ListButton,
-  EditButton,
-  DeleteButton,
   RichTextField,
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
 import { OnShowToolbar, CustomPagination } from './Helpers';
 
-// eslint-disable-next-line no-unused-vars
-const PostShowActions = ({ basePath, data, resource }) => (
-  <TopToolbar>
-    <ListButton basePath={basePath} />
-    <EditButton basePath={basePath} record={data} />
-    <DeleteButton basePath={basePath} record={data} />
-  </TopToolbar>
-);
-
 const PostTitle = ({ record }) => {
-  return <span>{record ? `Titre : ${record.faq_title}` : ''}</span>;
+  return <span>{record ? record.faq_title : ''}</span>;
 };
 
 export const faqList = (props) => {
