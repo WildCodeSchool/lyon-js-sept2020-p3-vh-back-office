@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-param-reassign */
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
@@ -57,7 +58,12 @@ export default {
   },
 
   update: (resource, params) => {
-    if (resource !== 'sponsors' && resource !== 'events') {
+    if (
+      resource !== 'sponsors' &&
+      resource !== 'events' &&
+      resource !== 'users' &&
+      resource !== 'products'
+    ) {
       return httpClient(`${apiUrl}/${resource}/${params.id}`, {
         method: 'PUT',
         body: JSON.stringify(params.data),
@@ -65,33 +71,22 @@ export default {
         data: { ...params.data, id: json.id },
       }));
     }
-    if (resource === 'events') {
-      const formData = new FormData();
-
-      formData.append('date', params.data.date);
-      formData.append('title', params.data.title);
-      formData.append('price', params.data.price);
-      formData.append('description', params.data.description);
-      formData.append('moderator_id', params.data.moderator_id);
-      formData.append('duration_seconds', params.data.duration_seconds);
-      formData.append('image', params.data.image.rawFile);
-      formData.append('address_id', params.data.address_id);
-      formData.append('availabilities', params.data.availabilities);
-      formData.append('wine_id', params.data.wine_id);
-
-      return httpClient(`${apiUrl}/${resource}/${params.id}`, {
-        method: 'PUT',
-        body: formData,
-      }).then(({ json }) => ({
-        data: { ...params.data, id: json.id },
-      }));
-    }
-
     const formData = new FormData();
-
-    formData.append('name', params.data.name);
-    formData.append('image', params.data.image.rawFile);
-
+    for (const [key, value] of Object.entries(params.data)) {
+      if (value === null) {
+        formData.append(key, '');
+      } else if (value !== null) {
+        formData.append(key, value);
+      }
+    }
+    if (params.data.image) {
+      formData.delete('image');
+      if (params.data.image.rawFile) {
+        formData.append('image', params.data.image.rawFile);
+      } else {
+        formData.append('image', params.data.image);
+      }
+    }
     return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'PUT',
       body: formData,
@@ -111,7 +106,13 @@ export default {
   },
 
   create: (resource, params) => {
-    if (resource !== 'sponsors' && resource !== 'events') {
+    if (
+      resource !== 'sponsors' &&
+      resource !== 'events' &&
+      resource !== 'users' &&
+      resource !== 'products' &&
+      resource !== 'carrousel'
+    ) {
       return httpClient(`${apiUrl}/${resource}`, {
         method: 'POST',
         body: JSON.stringify(params.data),
@@ -119,32 +120,14 @@ export default {
         data: { ...params.data, id: json.id },
       }));
     }
-    if (resource === 'events') {
-      const formData = new FormData();
-
-      formData.append('date', params.data.date);
-      formData.append('title', params.data.title);
-      formData.append('price', params.data.price);
-      formData.append('description', params.data.description);
-      formData.append('moderator_id', params.data.moderator_id);
-      formData.append('duration_seconds', params.data.duration_seconds);
-      formData.append('image', params.data.image.rawFile);
-      formData.append('address_id', params.data.address_id);
-      formData.append('availabilities', params.data.availabilities);
-      formData.append('wine_id', params.data.wine_id);
-
-      return httpClient(`${apiUrl}/${resource}`, {
-        method: 'POST',
-        body: formData,
-      }).then(({ json }) => ({
-        data: { ...params.data, id: json.id },
-      }));
-    }
-
     const formData = new FormData();
-
-    formData.append('name', params.data.name);
-    formData.append('image', params.data.image.rawFile);
+    for (const [key, value] of Object.entries(params.data)) {
+      formData.append(key, value);
+    }
+    if (formData.get('image')) {
+      formData.delete('image');
+      formData.append('image', params.data.image.rawFile);
+    }
 
     return httpClient(`${apiUrl}/${resource}`, {
       method: 'POST',
