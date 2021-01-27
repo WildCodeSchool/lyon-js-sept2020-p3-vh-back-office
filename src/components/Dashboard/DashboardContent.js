@@ -15,8 +15,8 @@ export const userListDahsboard = (props) => {
         <Datagrid
           rowClick={(id, basepath, record) => `/users/${record.id}/show`}
         >
-          <TextField source="firstname" />
-          <TextField source="lastname" />
+          <TextField source="firstname" label="Prénom" />
+          <TextField source="lastname" label="Nom" />
         </Datagrid>
       </List>
     </div>
@@ -36,8 +36,8 @@ export const reviewsListDashboard = (props) => {
         <SimpleList
           rowClick={(id, basepath, record) => `/reviews/${record.id}/show`}
         >
-          <TextField source="title" />
-          <TextField source="rating" />
+          <TextField source="title" label="Événement" />
+          <TextField source="rating" label="Note" />
         </SimpleList>
       </List>
     </div>
@@ -58,9 +58,9 @@ export const messageListDashboard = (props) => {
         <Datagrid
           rowClick={(id, basepath, record) => `/contact/${record.id}/show`}
         >
-          <TextField source="firstname" />
-          <TextField source="lastname" />
-          <TextField source="purpose" />
+          <TextField source="firstname" label="Prénom" />
+          <TextField source="lastname" label="Nom" />
+          <TextField source="purpose" label="Sujet" />
         </Datagrid>
       </List>
     </div>
@@ -80,11 +80,11 @@ export const EventListDashboard = (props) => {
         <Datagrid
           rowClick={(id, basepath, record) => `/events/${record.id}/show`}
         >
-          <TextField source="title" />
-          <DateField source="date" />
-          <TextField label="id" source="firstname" />
-          <TextField label="rue" source="city" />
-          <TextField source="availabilities" />
+          <TextField source="title" label="Événement" />
+          <DateField source="date" label="Date" />
+          <TextField label="Animateur" source="firstname" />
+          <TextField label="Ville" source="city" />
+          <TextField source="availabilities" label="Places disponibles" />
         </Datagrid>
       </List>
     </div>

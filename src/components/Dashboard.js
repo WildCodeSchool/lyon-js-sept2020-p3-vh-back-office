@@ -8,7 +8,7 @@ import {
   messageListDashboard,
   EventListDashboard,
 } from './Dashboard/DashboardContent';
-import { ShowEvent } from './event/event';
+import { ShowEvent } from './Events';
 
 export default () => (
   <div className="dashboardContainer">

@@ -16,7 +16,7 @@
     margin-top: 30px;
   }
   .dashboardBodyLeft {
-    width: 40%;
+    width: 45%;
     .dashboardMessage {
       height: 45%;
       margin-bottom: 8%;
@@ -40,12 +40,14 @@
     margin-right: 20px;
     .dashboardReview {
       height: 98%;
+      width: 300px;
       border-left: solid 5px #3c434c;
       border-top: solid 5px #3c434c;
       overflow: auto;
     }
     .dashboardUser {
       height: 98%;
+      width: 300px;
       border-left: solid 5px #8c0226;
       border-top: solid 5px #8c0226;
       overflow: auto;
