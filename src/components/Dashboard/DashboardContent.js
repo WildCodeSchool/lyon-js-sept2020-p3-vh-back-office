@@ -12,7 +12,9 @@ export const userListDahsboard = (props) => {
         bulkActionButtons={false}
         pagination={false}
       >
-        <Datagrid rowClick="show">
+        <Datagrid
+          rowClick={(id, basepath, record) => `/users/${record.id}/show`}
+        >
           <TextField source="firstname" />
           <TextField source="lastname" />
         </Datagrid>
@@ -31,7 +33,9 @@ export const reviewsListDashboard = (props) => {
         bulkActionButtons={false}
         pagination={false}
       >
-        <SimpleList rowClick="show">
+        <SimpleList
+          rowClick={(id, basepath, record) => `/reviews/${record.id}/show`}
+        >
           <TextField source="title" />
           <TextField source="rating" />
         </SimpleList>
@@ -51,7 +55,9 @@ export const messageListDashboard = (props) => {
         bulkActionButtons={false}
         pagination={false}
       >
-        <Datagrid rowClick="show">
+        <Datagrid
+          rowClick={(id, basepath, record) => `/contact/${record.id}/show`}
+        >
           <TextField source="firstname" />
           <TextField source="lastname" />
           <TextField source="purpose" />
@@ -71,7 +77,9 @@ export const EventListDashboard = (props) => {
         bulkActionButtons={false}
         pagination={false}
       >
-        <Datagrid rowClick="show">
+        <Datagrid
+          rowClick={(id, basepath, record) => `/events/${record.id}/show`}
+        >
           <TextField source="title" />
           <DateField source="date" />
           <TextField label="id" source="firstname" />

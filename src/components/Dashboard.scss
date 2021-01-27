@@ -19,7 +19,7 @@
     width: 40%;
     .dashboardMessage {
       height: 45%;
-      margin-bottom: 12%;
+      margin-bottom: 8%;
       border-left: solid 5px #3c434c;
       border-top: solid 5px #3c434c;
       overflow: auto;
@@ -39,13 +39,13 @@
     justify-content: space-between;
     margin-right: 20px;
     .dashboardReview {
-      height: 100%;
+      height: 98%;
       border-left: solid 5px #3c434c;
       border-top: solid 5px #3c434c;
       overflow: auto;
     }
     .dashboardUser {
-      height: 100%;
+      height: 98%;
       border-left: solid 5px #8c0226;
       border-top: solid 5px #8c0226;
       overflow: auto;
@@ -56,6 +56,10 @@
 .MuiPaper-root {
   background-color: none;
 }
+
+// .MuiTableRow-root {
+//   height: 60px;
+// }
 
 /* ----------------------------TOOL BAR -----------------------------------------*/
 
