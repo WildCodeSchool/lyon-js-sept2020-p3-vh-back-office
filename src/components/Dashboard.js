@@ -8,6 +8,7 @@ import {
   messageListDashboard,
   EventListDashboard,
 } from './Dashboard/DashboardContent';
+import { ShowEvent } from './event/event';
 
 export default () => (
   <div className="dashboardContainer">
@@ -25,7 +26,12 @@ export default () => (
           <CardHeader title="Prochains Événements" />
           <CardContent>
             {' '}
-            <Resource name="events" list={EventListDashboard} />
+            <Resource
+              options={{ label: 'Events' }}
+              name="events"
+              list={EventListDashboard}
+              show={ShowEvent}
+            />
           </CardContent>
         </Card>
       </div>
