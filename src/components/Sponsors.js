@@ -120,10 +120,12 @@ export const showSponsors = (props) => {
           label="Aperçu de l'image"
           render={(record) => {
             return (
-              <img
-                alt={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
-                src={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
-              />
+              typeof record.image === 'string' && (
+                <img
+                  alt={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
+                  src={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
+                />
+              )
             );
           }}
         />

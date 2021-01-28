@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
+import './App.scss';
 import { Admin, Resource } from 'react-admin';
 import EmailIcon from '@material-ui/icons/Email';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
