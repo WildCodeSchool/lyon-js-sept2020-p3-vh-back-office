@@ -1,8 +1,9 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-param-reassign */
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-const apiUrl = process.env.REACT_APP_API_BASE_URL;
+const apiUrl = 'http://localhost:5000';
 
 const httpClient = (url, options = {}) => {
   if (!options.headers) {
@@ -56,11 +57,43 @@ export default {
     }));
   },
 
-  update: (resource, params) =>
-    httpClient(`${apiUrl}/${resource}/${params.id}`, {
+  update: (resource, params) => {
+    if (
+      resource !== 'sponsors' &&
+      resource !== 'events' &&
+      resource !== 'users' &&
+      resource !== 'products'
+    ) {
+      return httpClient(`${apiUrl}/${resource}/${params.id}`, {
+        method: 'PUT',
+        body: JSON.stringify(params.data),
+      }).then(({ json }) => ({
+        data: { ...params.data, id: json.id },
+      }));
+    }
+    const formData = new FormData();
+    for (const [key, value] of Object.entries(params.data)) {
+      if (value === null) {
+        formData.append(key, '');
+      } else if (value !== null) {
+        formData.append(key, value);
+      }
+    }
+    if (params.data.image) {
+      formData.delete('image');
+      if (params.data.image.rawFile) {
+        formData.append('image', params.data.image.rawFile);
+      } else {
+        formData.append('image', params.data.image);
+      }
+    }
+    return httpClient(`${apiUrl}/${resource}/${params.id}`, {
       method: 'PUT',
-      body: JSON.stringify(params.data),
-    }).then(({ json }) => ({ data: json })),
+      body: formData,
+    }).then(({ json }) => ({
+      data: { ...params.data, id: json.id },
+    }));
+  },
 
   updateMany: (resource, params) => {
     const query = {
@@ -72,16 +105,14 @@ export default {
     }).then(({ json }) => ({ data: json }));
   },
 
-  // create: (resource, params) =>
-  //   httpClient(`${apiUrl}/${resource}`, {
-  //     method: 'POST',
-  //     body: JSON.stringify(params.data),
-  //   }).then(({ json }) => ({
-  //     data: { ...params.data, id: json.id },
-  //   })),
-
   create: (resource, params) => {
-    if (resource !== 'sponsors') {
+    if (
+      resource !== 'sponsors' &&
+      resource !== 'events' &&
+      resource !== 'users' &&
+      resource !== 'products' &&
+      resource !== 'carrousel'
+    ) {
       return httpClient(`${apiUrl}/${resource}`, {
         method: 'POST',
         body: JSON.stringify(params.data),
@@ -89,11 +120,14 @@ export default {
         data: { ...params.data, id: json.id },
       }));
     }
-
     const formData = new FormData();
-
-    formData.append('name', params.data.name);
-    formData.append('image', params.data.image.rawFile);
+    for (const [key, value] of Object.entries(params.data)) {
+      formData.append(key, value);
+    }
+    if (formData.get('image')) {
+      formData.delete('image');
+      formData.append('image', params.data.image.rawFile);
+    }
 
     return httpClient(`${apiUrl}/${resource}`, {
       method: 'POST',
