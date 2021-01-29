@@ -1,8 +1,11 @@
 // in src/authProvider.js
+
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
+
 export default {
   // called when the user attempts to log in
   login: ({ username, password }) => {
-    const request = new Request('http://localhost:5000/auth/bo-login', {
+    const request = new Request(`${apiUrl}/auth/bo-login`, {
       method: 'POST',
       credentials: 'include',
       body: JSON.stringify({ email: username, password }),
@@ -25,7 +28,7 @@ export default {
   // called when the user clicks on the logout button
   logout: () => {
     localStorage.removeItem('auth');
-    const request = new Request('http://localhost:5000/auth/logout', {
+    const request = new Request(`${apiUrl}/auth/logout`, {
       method: 'GET',
       headers: new Headers({ 'Content-Type': 'application/json' }),
     });
