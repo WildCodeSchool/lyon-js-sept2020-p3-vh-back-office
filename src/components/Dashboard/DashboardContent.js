@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { List, Datagrid, TextField, DateField, SimpleList } from 'react-admin';
+import { List, Datagrid, TextField, DateField } from 'react-admin';
 
-export const userListDahsboard = (props) => {
+export const userListDashboard = (props) => {
   return (
     <div>
       <List
@@ -33,12 +33,14 @@ export const reviewsListDashboard = (props) => {
         bulkActionButtons={false}
         pagination={false}
       >
-        <SimpleList
-          rowClick={(id, basepath, record) => `/reviews/${record.id}/show`}
+        <Datagrid
+          rowClick={(id, basepath, record) => {
+            return `/reviews/${record.id}/show`;
+          }}
         >
           <TextField source="title" label="Événement" />
           <TextField source="rating" label="Note" />
-        </SimpleList>
+        </Datagrid>
       </List>
     </div>
   );

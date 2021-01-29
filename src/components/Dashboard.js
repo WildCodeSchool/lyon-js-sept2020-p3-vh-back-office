@@ -3,7 +3,7 @@ import { Resource } from 'react-admin';
 import './Dashboard.scss';
 import { Card, CardContent, CardHeader } from '@material-ui/core';
 import {
-  userListDahsboard,
+  userListDashboard,
   reviewsListDashboard,
   messageListDashboard,
   EventListDashboard,
@@ -56,7 +56,7 @@ export default () => (
             <Resource
               options={{ label: 'Users' }}
               name="users"
-              list={userListDahsboard}
+              list={userListDashboard}
             />
           </CardContent>
         </Card>
