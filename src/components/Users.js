@@ -17,7 +17,9 @@ import {
   ImageField,
   required,
   SelectInput,
+  RichTextField,
 } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
 import {
   CustomSlicedField,
   OnShowToolbar,
@@ -43,18 +45,6 @@ export const userList = (props) => {
           <TextField source="phone_number" label="Téléphone" />
           <CustomSlicedField label="Bio" />
           <TextField source="role" label="Type utilisateur" />
-          <FunctionField
-            label="Lien vers la photo"
-            render={(record) => {
-              return (
-                <a
-                  href={`${process.env.REACT_APP_API_BASE_URL}/${record.photo_url}`}
-                >
-                  {record.photo_url}
-                </a>
-              );
-            }}
-          />
         </Datagrid>
       </List>
     </div>
@@ -84,7 +74,7 @@ export const createUser = (props) => {
             label="Confirmer le mot de passe"
           />
           <TextInput source="phone_number" label="Téléphone" />
-          <TextInput source="bio" />
+          <RichTextInput source="bio" />
           <SelectInput
             source="role"
             choices={[
@@ -114,7 +104,7 @@ export const showUser = (props) => {
         <TextField source="lastname" label="Nom" />
         <TextField source="email" />
         <TextField source="phone_number" label="Téléphone" />
-        <TextField source="bio" />
+        <RichTextField source="bio" />
         <TextField source="role" label="Type utilisateur" />
         <FunctionField
           label="Aperçu de la photo"
@@ -143,7 +133,7 @@ export const userEdit = (props) => (
       <TextInput source="lastname" label="Nom" validate={[required()]} />
       <TextInput source="email" validate={[required()]} />
       <TextInput source="phone_number" />
-      <TextInput source="bio" />
+      <RichTextInput source="bio" />
       <SelectInput
         source="role"
         choices={[
