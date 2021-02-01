@@ -111,6 +111,7 @@ export const showUser = (props) => {
           render={(record) => {
             return (
               <img
+                style={{ width: '200px' }}
                 alt={record.lastname}
                 src={`${process.env.REACT_APP_API_BASE_URL}/${record.photo_url}`}
               />
@@ -147,6 +148,7 @@ export const userEdit = (props) => (
         render={(record) => {
           return (
             <img
+              style={{ width: '200px' }}
               alt={record.lastname}
               src={`${process.env.REACT_APP_API_BASE_URL}/${record.photo_url}`}
             />

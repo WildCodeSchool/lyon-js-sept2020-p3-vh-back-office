@@ -167,6 +167,7 @@ export const ShowEvent = (props) => {
           render={(record) => {
             return (
               <img
+                style={{ width: '350px' }}
                 alt={record.title}
                 src={`${process.env.REACT_APP_API_BASE_URL}/${record.main_picture_url}`}
               />
@@ -234,6 +235,7 @@ export const EventEdit = (props) => {
           render={(record) => {
             return (
               <img
+                style={{ width: '350px' }}
                 alt={record.title}
                 src={`${process.env.REACT_APP_API_BASE_URL}/${record.main_picture_url}`}
               />
