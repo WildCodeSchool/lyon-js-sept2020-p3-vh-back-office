@@ -26,9 +26,9 @@ export default {
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-    return httpClient(url).then(({ json }) => ({
-      data: json,
-      total: json.length,
+    return httpClient(url).then((res) => ({
+      data: res.json,
+      total: parseInt(res.headers.get('X-Total-Count'), 10),
     }));
   },
 

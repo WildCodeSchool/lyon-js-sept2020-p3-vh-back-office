@@ -20,10 +20,10 @@ import {
   NumberInput,
   required,
   useListContext,
+  Pagination,
 } from 'react-admin';
-import { Button, Toolbar } from '@material-ui/core';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
+import { Toolbar } from '@material-ui/core';
+
 import { OnShowToolbar, CustomSlicedField } from '../services/Helpers';
 import API from '../services/API';
 
@@ -31,25 +31,13 @@ const PostTitle = ({ record }) => {
   return <span>{record ? `Détail de l'évènement ${record.title} ` : ''}</span>;
 };
 
-const PostPagination = () => {
-  const { page, perPage, total, setPage } = useListContext();
-  console.log(perPage);
+const PostPagination = (props) => {
+  const { perPage, total } = useListContext();
   const nbPages = Math.ceil(total / perPage) || 1;
   return (
     nbPages > 1 && (
       <Toolbar>
-        {page > 1 && (
-          <Button color="primary" key="prev" onClick={() => setPage(page - 1)}>
-            <ChevronLeft />
-            Prev
-          </Button>
-        )}
-        {page !== nbPages && (
-          <Button color="primary" key="next" onClick={() => setPage(page + 1)}>
-            Next
-            <ChevronRight />
-          </Button>
-        )}
+        <Pagination rowsPerPageOptions={[5, 10, 25, 50, 100]} {...props} />
       </Toolbar>
     )
   );
