@@ -16,10 +16,17 @@ const httpClient = (url, options = {}) => {
 };
 
 export default {
-  getList: (resource) => {
-    const url = `${apiUrl}/${resource}`;
+  getList: (resource, params) => {
+    const { page, perPage } = params.pagination;
+    const { field, order } = params.sort;
+    const query = {
+      sort: JSON.stringify([field, order]),
+      range: JSON.stringify([(page - 1) * perPage, page * perPage]),
+      filter: JSON.stringify(params.filter),
+    };
+    const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-    return httpClient(url).then(({ /* headers, */ json }) => ({
+    return httpClient(url).then(({ json }) => ({
       data: json,
       total: json.length,
     }));
