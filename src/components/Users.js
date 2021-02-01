@@ -11,13 +11,12 @@ import {
   TextField,
   SimpleForm,
   FunctionField,
-  // UrlField,
   EmailField,
   PasswordInput,
   ImageInput,
   ImageField,
-  AutocompleteInput,
   required,
+  SelectInput,
 } from 'react-admin';
 import {
   CustomSlicedField,
@@ -86,11 +85,12 @@ export const createUser = (props) => {
           />
           <TextInput source="phone_number" label="Téléphone" />
           <TextInput source="bio" />
-          <AutocompleteInput
+          <SelectInput
             source="role"
             choices={[
               { id: 'animator', name: 'Animateur' },
               { id: 'customer', name: 'Client' },
+              { id: 'admin', name: 'Administrateur' },
             ]}
           />
           <ImageInput source="image" label="Aperçu de l'image" accept="image/*">
@@ -144,7 +144,14 @@ export const userEdit = (props) => (
       <TextInput source="email" validate={[required()]} />
       <TextInput source="phone_number" />
       <TextInput source="bio" />
-      <TextInput source="role" label="Type utilisateur" />
+      <SelectInput
+        source="role"
+        choices={[
+          { id: 'animator', name: 'Animateur' },
+          { id: 'customer', name: 'Client' },
+          { id: 'admin', name: 'Administrateur' },
+        ]}
+      />
       <FunctionField
         label="Aperçu de la photo actuelle"
         render={(record) => {
