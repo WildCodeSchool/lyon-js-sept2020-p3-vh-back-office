@@ -92,6 +92,7 @@ export const showWine = (props) => {
           render={(record) => {
             return (
               <img
+                style={{ width: '300px' }}
                 alt={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
                 src={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
               />
@@ -120,6 +121,7 @@ export const wineEdit = (props) => (
         render={(record) => {
           return (
             <img
+              style={{ width: '200px' }}
               alt={record.name}
               src={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
             />

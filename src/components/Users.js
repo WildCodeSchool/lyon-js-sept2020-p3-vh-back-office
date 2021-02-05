@@ -15,9 +15,11 @@ import {
   PasswordInput,
   ImageInput,
   ImageField,
-  AutocompleteInput,
   required,
+  SelectInput,
+  RichTextField,
 } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
 import { CustomSlicedField, OnShowToolbar } from '../services/Helpers';
 
 const Title = ({ record }) => {
@@ -39,18 +41,6 @@ export const userList = (props) => {
           <TextField source="phone_number" label="Téléphone" />
           <CustomSlicedField label="Bio" />
           <TextField source="role" label="Type utilisateur" />
-          <FunctionField
-            label="Lien vers la photo"
-            render={(record) => {
-              return (
-                <a
-                  href={`${process.env.REACT_APP_API_BASE_URL}/${record.photo_url}`}
-                >
-                  {record.photo_url}
-                </a>
-              );
-            }}
-          />
         </Datagrid>
       </List>
     </div>
@@ -80,12 +70,13 @@ export const createUser = (props) => {
             label="Confirmer le mot de passe"
           />
           <TextInput source="phone_number" label="Téléphone" />
-          <TextInput source="bio" />
-          <AutocompleteInput
+          <RichTextInput source="bio" />
+          <SelectInput
             source="role"
             choices={[
               { id: 'animator', name: 'Animateur' },
               { id: 'customer', name: 'Client' },
+              { id: 'admin', name: 'Administrateur' },
             ]}
           />
           <ImageInput source="image" label="Aperçu de l'image" accept="image/*">
@@ -109,13 +100,14 @@ export const showUser = (props) => {
         <TextField source="lastname" label="Nom" />
         <TextField source="email" />
         <TextField source="phone_number" label="Téléphone" />
-        <TextField source="bio" />
+        <RichTextField source="bio" />
         <TextField source="role" label="Type utilisateur" />
         <FunctionField
           label="Aperçu de la photo"
           render={(record) => {
             return (
               <img
+                style={{ width: '200px' }}
                 alt={record.lastname}
                 src={`${process.env.REACT_APP_API_BASE_URL}/${record.photo_url}`}
               />
@@ -138,13 +130,21 @@ export const userEdit = (props) => (
       <TextInput source="lastname" label="Nom" validate={[required()]} />
       <TextInput source="email" validate={[required()]} />
       <TextInput source="phone_number" />
-      <TextInput source="bio" />
-      <TextInput source="role" label="Type utilisateur" />
+      <RichTextInput source="bio" />
+      <SelectInput
+        source="role"
+        choices={[
+          { id: 'animator', name: 'Animateur' },
+          { id: 'customer', name: 'Client' },
+          { id: 'admin', name: 'Administrateur' },
+        ]}
+      />
       <FunctionField
         label="Aperçu de la photo actuelle"
         render={(record) => {
           return (
             <img
+              style={{ width: '200px' }}
               alt={record.lastname}
               src={`${process.env.REACT_APP_API_BASE_URL}/${record.photo_url}`}
             />

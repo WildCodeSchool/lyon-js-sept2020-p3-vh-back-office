@@ -87,6 +87,7 @@ export const editSponsor = (props) => {
             render={(record) => {
               return (
                 <img
+                  style={{ width: '200px' }}
                   alt={record.name}
                   src={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
                 />
@@ -113,6 +114,7 @@ export const showSponsors = (props) => {
             return (
               typeof record.image === 'string' && (
                 <img
+                  style={{ width: '200px' }}
                   alt={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
                   src={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
                 />

@@ -89,6 +89,7 @@ export const showCarousel = (props) => {
           render={(record) => {
             return (
               <img
+                style={{ width: '500px' }}
                 alt={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
                 src={`${process.env.REACT_APP_API_BASE_URL}/${record.image}`}
               />
