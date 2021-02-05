@@ -11,7 +11,6 @@ import {
   TextField,
   SimpleForm,
   FunctionField,
-  // UrlField,
   EmailField,
   PasswordInput,
   ImageInput,
@@ -19,11 +18,7 @@ import {
   AutocompleteInput,
   required,
 } from 'react-admin';
-import {
-  CustomSlicedField,
-  OnShowToolbar,
-  CustomPagination,
-} from '../services/Helpers';
+import { CustomSlicedField, OnShowToolbar } from '../services/Helpers';
 
 const Title = ({ record }) => {
   return (
@@ -36,7 +31,7 @@ const Title = ({ record }) => {
 export const userList = (props) => {
   return (
     <div>
-      <List {...props} title="Utilisateurs" pagination={<CustomPagination />}>
+      <List {...props} title="Utilisateurs">
         <Datagrid rowClick="show">
           <TextField source="firstname" label="Prenom" />
           <TextField source="lastname" label="Nom" />

@@ -14,11 +14,7 @@ import {
   ImageField,
   required,
 } from 'react-admin';
-import {
-  OnShowToolbar,
-  CustomSlicedField,
-  CustomPagination,
-} from '../services/Helpers';
+import { OnShowToolbar, CustomSlicedField } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? `Fiche de la slide ${record.name}` : ''}</span>;
@@ -27,7 +23,7 @@ const PostTitle = ({ record }) => {
 export const carouselList = (props) => {
   return (
     <div>
-      <List {...props} title="Carousel" pagination={<CustomPagination />}>
+      <List {...props} title="Carousel">
         <Datagrid rowClick="show">
           <TextField source="name" label="Nom de la slide" />
           <CustomSlicedField label="Description (apparait sur la slide)" />

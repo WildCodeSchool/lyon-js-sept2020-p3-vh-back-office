@@ -9,11 +9,7 @@ import {
   ChipField,
   EmailField,
 } from 'react-admin';
-import {
-  OnShowToolbar,
-  CustomSlicedField,
-  CustomPagination,
-} from '../services/Helpers';
+import { OnShowToolbar, CustomSlicedField } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return (
@@ -26,7 +22,7 @@ const PostTitle = ({ record }) => {
 export const reviewsList = (props) => {
   return (
     <div>
-      <List {...props} title="Avis clients" pagination={<CustomPagination />}>
+      <List {...props} title="Avis clients">
         <Datagrid rowClick="show">
           <TextField source="firstname" label="Prénom" />
           <TextField source="lastname" label="Nom" />

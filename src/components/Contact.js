@@ -13,7 +13,6 @@ import {
   OnListToolbar,
   OnShowToolbar,
   CustomSlicedField,
-  CustomPagination,
 } from '../services/Helpers';
 
 const MessageTitle = ({ record }) => {
@@ -27,12 +26,7 @@ const MessageTitle = ({ record }) => {
 export const messageList = (props) => {
   return (
     <div>
-      <List
-        {...props}
-        pagination={<CustomPagination />}
-        title="Messages"
-        actions={<OnListToolbar />}
-      >
+      <List {...props} title="Messages" actions={<OnListToolbar />}>
         <Datagrid rowClick="show">
           <TextField source="firstname" label="Prénom" />
           <TextField source="lastname" label="Nom" />

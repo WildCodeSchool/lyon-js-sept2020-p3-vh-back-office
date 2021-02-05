@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import {
@@ -19,11 +20,7 @@ import {
   DateInput,
   NumberInput,
   required,
-  useListContext,
 } from 'react-admin';
-import { Button, Toolbar } from '@material-ui/core';
-import ChevronLeft from '@material-ui/icons/ChevronLeft';
-import ChevronRight from '@material-ui/icons/ChevronRight';
 import { OnShowToolbar, CustomSlicedField } from '../services/Helpers';
 import API from '../services/API';
 
@@ -31,34 +28,10 @@ const PostTitle = ({ record }) => {
   return <span>{record ? `Détail de l'évènement ${record.title} ` : ''}</span>;
 };
 
-const PostPagination = () => {
-  const { page, perPage, total, setPage } = useListContext();
-  console.log(perPage);
-  const nbPages = Math.ceil(total / perPage) || 1;
-  return (
-    nbPages > 1 && (
-      <Toolbar>
-        {page > 1 && (
-          <Button color="primary" key="prev" onClick={() => setPage(page - 1)}>
-            <ChevronLeft />
-            Prev
-          </Button>
-        )}
-        {page !== nbPages && (
-          <Button color="primary" key="next" onClick={() => setPage(page + 1)}>
-            Next
-            <ChevronRight />
-          </Button>
-        )}
-      </Toolbar>
-    )
-  );
-};
-
 export const EventList = (props) => {
   return (
     <div>
-      <List {...props} title="Evénements" pagination={<PostPagination />}>
+      <List {...props} title="Evénements">
         <Datagrid rowClick="show">
           <DateField source="date" />
           <TextField source="title" label="Evénement" />

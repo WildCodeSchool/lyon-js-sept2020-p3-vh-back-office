@@ -16,11 +16,7 @@ import {
   FunctionField,
   required,
 } from 'react-admin';
-import {
-  OnShowToolbar,
-  OnListToolbar,
-  CustomPagination,
-} from '../services/Helpers';
+import { OnShowToolbar, OnListToolbar } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? `Fiche du partenaire ${record.name} ` : ''}</span>;
@@ -29,12 +25,7 @@ const PostTitle = ({ record }) => {
 export const sponsorsList = (props) => {
   return (
     <div>
-      <List
-        {...props}
-        title="Sponsors"
-        actions={<OnListToolbar create />}
-        pagination={<CustomPagination />}
-      >
+      <List {...props} title="Sponsors" actions={<OnListToolbar create />}>
         <Datagrid rowClick="show">
           <TextField source="name" label="Nom du partenaire" />
           <FunctionField

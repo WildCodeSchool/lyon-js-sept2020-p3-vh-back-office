@@ -21,14 +21,14 @@ export default {
     const { field, order } = params.sort;
     const query = {
       sort: JSON.stringify([field, order]),
-      range: JSON.stringify([(page - 1) * perPage, page * perPage]),
+      range: JSON.stringify([perPage, page * perPage - perPage]),
       filter: JSON.stringify(params.filter),
     };
     const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-    return httpClient(url).then(({ json }) => ({
+    return httpClient(url).then(({ headers, json }) => ({
       data: json,
-      total: json.length,
+      total: parseInt(headers.get('X-Total-Count'), 10),
     }));
   },
 
@@ -50,7 +50,7 @@ export default {
     const { field, order } = params.sort;
     const query = {
       sort: JSON.stringify([field, order]),
-      range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
+      range: JSON.stringify([perPage, page * perPage]),
       filter: JSON.stringify({
         ...params.filter,
         [params.target]: params.id,
