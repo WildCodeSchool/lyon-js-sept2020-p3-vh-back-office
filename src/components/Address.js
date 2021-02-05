@@ -12,7 +12,7 @@ import {
   SimpleForm,
   required,
 } from 'react-admin';
-import { OnShowToolbar, CustomPagination } from '../services/Helpers';
+import { OnShowToolbar } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return (
@@ -27,7 +27,7 @@ const PostTitle = ({ record }) => {
 export const addressList = (props) => {
   return (
     <div>
-      <List {...props} title="Avis clients" pagination={<CustomPagination />}>
+      <List {...props} title="Avis clients">
         <Datagrid rowClick="show">
           <TextField source="street" label="Rue" />
           <TextField source="zipcode" label="Code postal" />

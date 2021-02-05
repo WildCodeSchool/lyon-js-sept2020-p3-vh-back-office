@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
 import {
@@ -22,12 +23,8 @@ import {
   required,
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
+import { OnShowToolbar, CustomSlicedField } from '../services/Helpers';
 import API from '../services/API';
-import {
-  OnShowToolbar,
-  CustomSlicedField,
-  CustomPagination,
-} from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? `Détail de l'évènement ${record.title} ` : ''}</span>;
@@ -36,7 +33,7 @@ const PostTitle = ({ record }) => {
 export const EventList = (props) => {
   return (
     <div>
-      <List {...props} pagination={<CustomPagination />} title="Evénements">
+      <List {...props} title="Evénements">
         <Datagrid rowClick="show">
           <DateField source="date" />
           <TextField source="title" label="Evénement" />

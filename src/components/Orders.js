@@ -9,7 +9,7 @@ import {
   SimpleShowLayout,
   NumberField,
 } from 'react-admin';
-import { OnShowToolbar, CustomPagination } from '../services/Helpers';
+import { OnShowToolbar } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? `Commande n°${record.order_id}` : ''}</span>;
@@ -18,7 +18,7 @@ const PostTitle = ({ record }) => {
 export const ordersList = (props) => {
   return (
     <div>
-      <List {...props} title="Commandes" pagination={<CustomPagination />}>
+      <List {...props} title="Commandes">
         <Datagrid rowClick="show">
           <TextField source="order_id" label="Numéro de commande" />
           <TextField source="firstname" label="Prénom" />
