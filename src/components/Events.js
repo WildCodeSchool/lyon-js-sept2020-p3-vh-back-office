@@ -18,8 +18,10 @@ import {
   FunctionField,
   DateInput,
   NumberInput,
+  RichTextField,
   required,
 } from 'react-admin';
+import RichTextInput from 'ra-input-rich-text';
 import API from '../services/API';
 import {
   OnShowToolbar,
@@ -91,7 +93,7 @@ export const CreateEvent = (props) => {
           <DateInput source="date" validate={[required()]} />
           <TextInput source="title" label="Evénement" validate={[required()]} />
           <TextInput source="price" label="Prix" validate={[required()]} />
-          <TextInput source="description" validate={[required()]} />
+          <RichTextInput source="description" validate={[required()]} />
           <SelectInput
             validate={[required()]}
             label="Sélectionnez un animateur"
@@ -148,7 +150,7 @@ export const ShowEvent = (props) => {
         <DateField source="date" />
         <TextField source="title" label="Evénement" />
         <TextField source="price" label="Prix" />
-        <TextField source="description" />
+        <RichTextField source="description" />
         <FunctionField
           label="Animateur"
           render={(record) => {
@@ -165,6 +167,7 @@ export const ShowEvent = (props) => {
           render={(record) => {
             return (
               <img
+                style={{ width: '350px' }}
                 alt={record.title}
                 src={`${process.env.REACT_APP_API_BASE_URL}/${record.main_picture_url}`}
               />
@@ -214,7 +217,7 @@ export const EventEdit = (props) => {
           min={0}
           validate={[required()]}
         />
-        <TextInput source="description" validate={[required()]} />
+        <RichTextInput source="description" validate={[required()]} />
         <SelectInput
           validate={[required()]}
           label="Sélectionnez un animateur"
@@ -232,6 +235,7 @@ export const EventEdit = (props) => {
           render={(record) => {
             return (
               <img
+                style={{ width: '350px' }}
                 alt={record.title}
                 src={`${process.env.REACT_APP_API_BASE_URL}/${record.main_picture_url}`}
               />
