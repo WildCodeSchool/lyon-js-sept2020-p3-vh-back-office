@@ -19,7 +19,7 @@ import {
   NumberInput,
   required,
 } from 'react-admin';
-import { CustomPagination, OnShowToolbar } from '../services/Helpers';
+import { OnShowToolbar } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return (
@@ -32,7 +32,7 @@ const PostTitle = ({ record }) => {
 export const wineList = (props) => {
   return (
     <div>
-      <List {...props} title="Wines" pagination={<CustomPagination />}>
+      <List {...props} title="Wines">
         <Datagrid rowClick="show">
           <TextField source="name" label="Nom" />
           <TextField source="vigneron" />

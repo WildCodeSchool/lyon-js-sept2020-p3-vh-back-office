@@ -20,11 +20,7 @@ import {
   RichTextField,
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
-import {
-  CustomSlicedField,
-  OnShowToolbar,
-  CustomPagination,
-} from '../services/Helpers';
+import { CustomSlicedField, OnShowToolbar } from '../services/Helpers';
 
 const Title = ({ record }) => {
   return (
@@ -37,7 +33,7 @@ const Title = ({ record }) => {
 export const userList = (props) => {
   return (
     <div>
-      <List {...props} title="Utilisateurs" pagination={<CustomPagination />}>
+      <List {...props} title="Utilisateurs">
         <Datagrid rowClick="show">
           <TextField source="firstname" label="Prenom" />
           <TextField source="lastname" label="Nom" />

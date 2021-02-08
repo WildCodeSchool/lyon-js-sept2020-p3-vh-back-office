@@ -14,7 +14,7 @@ import {
   required,
 } from 'react-admin';
 import RichTextInput from 'ra-input-rich-text';
-import { OnShowToolbar, CustomPagination } from '../services/Helpers';
+import { OnShowToolbar } from '../services/Helpers';
 
 const PostTitle = ({ record }) => {
   return <span>{record ? record.faq_title : ''}</span>;
@@ -23,7 +23,7 @@ const PostTitle = ({ record }) => {
 export const faqList = (props) => {
   return (
     <div>
-      <List {...props} title="FAQ" pagination={<CustomPagination />}>
+      <List {...props} title="FAQ">
         <Datagrid rowClick="show">
           <TextField source="faq_title" label="Question" />
           <RichTextField source="faq_content" label="Réponse" />
